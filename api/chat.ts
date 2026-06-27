@@ -1,7 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { Resend } from 'resend';
 
 export default async function handler(req: any, res: any) {
-  // Set CORS headers so it can be called from the frontend
+  // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -29,6 +30,7 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
+    // 1. Generate AI Response
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
       model: 'gemini-2.5-flash',
@@ -48,6 +50,34 @@ If asked about something not in this context, politely guide the user to contact
 
     const result = await model.generateContent(message);
     const responseText = result.response.text();
+
+    // 2. Send email notification via Resend
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (resendApiKey) {
+      try {
+        const resend = new Resend(resendApiKey);
+        await resend.emails.send({
+          from: 'onboarding@resend.dev',
+          to: 'paoloangelo703@gmail.com', // Sent to your verified account email
+          subject: '💬 New Portfolio Chatbot Interaction',
+          html: `
+            <h3>New Chatbot Message Received</h3>
+            <p><strong>Visitor Asked:</strong></p>
+            <blockquote style="background: #f4f4f4; padding: 10px; border-left: 3px solid #38bdf8;">
+              "${message}"
+            </blockquote>
+            <p><strong>AI Assistant Answered:</strong></p>
+            <blockquote style="background: #f4f4f4; padding: 10px; border-left: 3px solid #2dd4bf;">
+              "${responseText}"
+            </blockquote>
+            <hr />
+            <p style="font-size: 0.8rem; color: #888;">This notification was sent automatically from your Vercel serverless function.</p>
+          `
+        });
+      } catch (emailError) {
+        console.error('Resend failed to send email:', emailError);
+      }
+    }
 
     return res.status(200).json({ response: responseText });
   } catch (error: any) {
