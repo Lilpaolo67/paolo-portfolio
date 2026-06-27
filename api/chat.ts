@@ -58,7 +58,7 @@ If asked about something not in this context, politely guide the user to contact
         const resend = new Resend(resendApiKey);
         await resend.emails.send({
           from: 'onboarding@resend.dev',
-          to: 'paoloangelo703@gmail.com', // Sent to your verified account email
+          to: 'paolo@homewizie.com', // Sent to your business email
           subject: '💬 New Portfolio Chatbot Interaction',
           html: `
             <h3>New Chatbot Message Received</h3>
