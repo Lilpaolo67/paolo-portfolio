@@ -16,7 +16,9 @@ import {
   Camera,
   Layers,
   Menu,
-  X
+  X,
+  MessageSquare,
+  Send
 } from 'lucide-react';
 import './App.css';
 
@@ -94,6 +96,53 @@ export default function App() {
   const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  
+  const [chatOpen, setChatOpen] = useState<boolean>(false);
+  const [chatInput, setChatInput] = useState<string>('');
+  const [chatMessages, setChatMessages] = useState<Array<{ role: 'assistant' | 'user'; content: string }>>([
+    { role: 'assistant', content: "Hi! I'm Paolo's virtual assistant. Ask me anything about his Marine Engineering background, Homewizie B2B integrations, or how to work together!" }
+  ]);
+  const [chatLoading, setChatLoading] = useState<boolean>(false);
+
+  const handleSendChatMessage = async (text: string) => {
+    if (!text.trim()) return;
+    
+    const newMessages = [...chatMessages, { role: 'user' as const, content: text }];
+    setChatMessages(newMessages);
+    setChatLoading(true);
+    setChatInput('');
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response');
+      }
+
+      const data = await response.json();
+      setChatMessages([...newMessages, { role: 'assistant' as const, content: data.response }]);
+    } catch (error) {
+      console.error(error);
+      setChatMessages([...newMessages, { role: 'assistant' as const, content: "Sorry, I'm having trouble connecting to the ship's bridge right now. Please try again later or contact Paolo directly at paolo@homewizie.com!" }]);
+    } finally {
+      setChatLoading(false);
+    }
+  };
+
+  const handleChatSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSendChatMessage(chatInput);
+  };
+
+  const handleSendSuggestion = (text: string) => {
+    handleSendChatMessage(text);
+  };
 
   // Handle Navbar Scroll effect
   useEffect(() => {
@@ -653,6 +702,75 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Floating AI Chatbot */}
+      <button 
+        className="chatbot-float-btn" 
+        onClick={() => setChatOpen(!chatOpen)}
+        aria-label="Toggle chat"
+      >
+        {chatOpen ? <X size={22} /> : <MessageSquare size={22} />}
+      </button>
+
+      <div className={`chatbot-panel ${chatOpen ? 'open' : ''}`}>
+        <div className="chat-header">
+          <div className="chat-header-info">
+            <div className="chat-avatar">
+              <Compass size={16} className="propeller-icon" style={{ animation: 'spin 20s linear infinite' }} />
+            </div>
+            <div>
+              <div className="chat-title">Paolo's Assistant</div>
+              <div className="chat-status">Online</div>
+            </div>
+          </div>
+          <button className="chat-close-btn" onClick={() => setChatOpen(false)} aria-label="Close chat">
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="chat-messages">
+          {chatMessages.map((msg, i) => (
+            <div key={i} className={`chat-bubble ${msg.role}`}>
+              {msg.content}
+            </div>
+          ))}
+          {chatLoading && (
+            <div className="chat-bubble assistant">
+              <div className="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="chat-suggestions">
+          <button className="suggestion-chip" onClick={() => handleSendSuggestion("What is Homewizie's B2B model?")}>
+            What is Homewizie's B2B model?
+          </button>
+          <button className="suggestion-chip" onClick={() => handleSendSuggestion("Tell me about Paolo's engineering background.")}>
+            Tell me about Paolo's engineering background.
+          </button>
+          <button className="suggestion-chip" onClick={() => handleSendSuggestion("How can I partner with Homewizie?")}>
+            How can I partner with Homewizie?
+          </button>
+        </div>
+
+        <form onSubmit={handleChatSubmit} className="chat-input-form">
+          <input 
+            type="text" 
+            className="chat-input" 
+            placeholder="Ask anything..." 
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            disabled={chatLoading}
+          />
+          <button type="submit" className="chat-send-btn" disabled={chatLoading} aria-label="Send message">
+            <Send size={16} />
+          </button>
+        </form>
+      </div>
     </>
   );
 }
