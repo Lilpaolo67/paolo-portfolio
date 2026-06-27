@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send, X, MessageSquare, Mail, ExternalLink, Download } from 'lucide-react';
 import './index.css';
 
@@ -53,24 +53,78 @@ const BoatScene = () => {
           <path className="wave wave3" d="M-100,308 Q150,295 400,308 Q650,321 900,308 Q1050,295 1200,308 L1200,500 L-100,500 Z" fill="rgba(67,56,202,0.15)" />
         </g>
         <g className="boat-bob">
-          <path d="M270,305 Q290,325 400,328 Q510,325 530,305 L510,300 Q400,315 290,300 Z" fill="url(#hullGrad)" stroke="#4338ca" strokeWidth="1.5" />
-          <path d="M290,300 Q400,310 510,300" stroke="#6366f1" strokeWidth="2" fill="none" opacity="0.7" />
-          <rect x="310" y="292" width="180" height="10" rx="3" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
-          <line x1="400" y1="295" x2="400" y2="170" stroke="#e2e8f0" strokeWidth="2.5" />
-          <path d="M400,175 L400,290 L460,260 Z" fill="url(#sailGrad)" opacity="0.92" />
-          <path d="M400,200 L400,285 L340,255 Z" fill="white" opacity="0.75" />
-          <path d="M400,170 L400,180 L415,175 Z" fill="#6366f1" />
-          <line x1="400" y1="175" x2="460" y2="295" stroke="rgba(226,232,240,0.3)" strokeWidth="1" />
-          <line x1="400" y1="175" x2="340" y2="295" stroke="rgba(226,232,240,0.3)" strokeWidth="1" />
-          <rect x="388" y="275" width="8" height="16" rx="2" fill="#818cf8" />
-          <circle cx="392" cy="272" r="5" fill="#a5b4fc" />
-          <path d="M396,280 Q408,272 412,268" stroke="#818cf8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-          <line x1="390" y1="291" x2="388" y2="298" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
-          <line x1="394" y1="291" x2="396" y2="298" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="360" cy="310" r="5" fill="none" stroke="#6366f1" strokeWidth="1.5" filter="url(#portGlow)" />
-          <circle cx="360" cy="310" r="2.5" fill="rgba(99,102,241,0.4)" />
-          <circle cx="440" cy="310" r="5" fill="none" stroke="#6366f1" strokeWidth="1.5" filter="url(#portGlow)" />
-          <circle cx="440" cy="310" r="2.5" fill="rgba(99,102,241,0.4)" />
+          {/* ── Luxury Yacht ── */}
+
+          {/* Main hull — wide, sleek, pointed bow */}
+          <path d="M210,308 L530,308 L545,318 Q400,332 255,318 Z" fill="url(#hullGrad)" stroke="#4338ca" strokeWidth="1.5" />
+          {/* Hull waterline accent stripe */}
+          <path d="M255,318 Q400,328 545,318" stroke="#6366f1" strokeWidth="2" fill="none" opacity="0.8" />
+          {/* Bow point */}
+          <path d="M530,308 L555,310 Q548,320 545,318 L530,318 Z" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
+
+          {/* Main deck surface */}
+          <rect x="220" y="296" width="310" height="13" rx="2" fill="#16133a" stroke="#3730a3" strokeWidth="1" />
+
+          {/* Lower cabin (main body) */}
+          <rect x="260" y="262" width="220" height="35" rx="4" fill="url(#hullGrad)" stroke="#4338ca" strokeWidth="1.2" />
+          {/* Lower cabin windows — row of 5 */}
+          <rect x="272" y="270" width="22" height="14" rx="3" fill="rgba(165,180,252,0.18)" stroke="#6366f1" strokeWidth="1" />
+          <rect x="303" y="270" width="22" height="14" rx="3" fill="rgba(165,180,252,0.18)" stroke="#6366f1" strokeWidth="1" />
+          <rect x="334" y="270" width="22" height="14" rx="3" fill="rgba(165,180,252,0.18)" stroke="#6366f1" strokeWidth="1" />
+          <rect x="365" y="270" width="22" height="14" rx="3" fill="rgba(165,180,252,0.18)" stroke="#6366f1" strokeWidth="1" />
+          <rect x="396" y="270" width="22" height="14" rx="3" fill="rgba(165,180,252,0.15)" stroke="#6366f1" strokeWidth="1" />
+          {/* Window inner glow */}
+          <rect x="274" y="272" width="18" height="10" rx="2" fill="rgba(99,102,241,0.12)" />
+          <rect x="305" y="272" width="18" height="10" rx="2" fill="rgba(99,102,241,0.12)" />
+          <rect x="336" y="272" width="18" height="10" rx="2" fill="rgba(99,102,241,0.12)" />
+          <rect x="367" y="272" width="18" height="10" rx="2" fill="rgba(99,102,241,0.12)" />
+
+          {/* Bridge deck (upper cabin) */}
+          <rect x="290" y="237" width="165" height="28" rx="4" fill="#1a1745" stroke="#4338ca" strokeWidth="1.2" />
+          {/* Bridge windows — panoramic wraparound */}
+          <rect x="298" y="242" width="148" height="14" rx="3" fill="rgba(165,180,252,0.2)" stroke="#6366f1" strokeWidth="1" />
+          <line x1="340" y1="242" x2="340" y2="256" stroke="rgba(99,102,241,0.3)" strokeWidth="1" />
+          <line x1="380" y1="242" x2="380" y2="256" stroke="rgba(99,102,241,0.3)" strokeWidth="1" />
+          <line x1="420" y1="242" x2="420" y2="256" stroke="rgba(99,102,241,0.3)" strokeWidth="1" />
+
+          {/* Top sundeck */}
+          <rect x="305" y="225" width="135" height="13" rx="3" fill="#12104a" stroke="#3730a3" strokeWidth="1" />
+
+          {/* Radar mast */}
+          <line x1="370" y1="225" x2="370" y2="185" stroke="#e2e8f0" strokeWidth="2" />
+          <line x1="355" y1="195" x2="385" y2="195" stroke="#e2e8f0" strokeWidth="1.5" />
+          {/* Radar dish */}
+          <ellipse cx="370" cy="192" rx="12" ry="5" fill="none" stroke="#a5b4fc" strokeWidth="1.5" />
+          <line x1="370" y1="192" x2="370" y2="187" stroke="#a5b4fc" strokeWidth="1.5" />
+          {/* Radar spin glow */}
+          <circle cx="370" cy="192" r="3" fill="#6366f1" opacity="0.7" filter="url(#portGlow)" />
+          {/* Antenna */}
+          <line x1="440" y1="225" x2="440" y2="200" stroke="#cbd5e1" strokeWidth="1.5" />
+          <circle cx="440" cy="199" r="2" fill="#a5b4fc" />
+
+          {/* Deck railings */}
+          <line x1="220" y1="296" x2="220" y2="285" stroke="#475569" strokeWidth="1" />
+          <line x1="530" y1="296" x2="530" y2="285" stroke="#475569" strokeWidth="1" />
+          <line x1="220" y1="291" x2="530" y2="291" stroke="#334155" strokeWidth="0.8" />
+
+          {/* Person silhouette on upper sundeck */}
+          {/* Body */}
+          <rect x="415" y="213" width="7" height="13" rx="2" fill="#818cf8" />
+          {/* Head */}
+          <circle cx="418" cy="210" r="4.5" fill="#a5b4fc" />
+          {/* Arm waving */}
+          <path d="M422,217 Q433,209 437,205" stroke="#818cf8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          {/* Legs */}
+          <line x1="416" y1="226" x2="414" y2="233" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
+          <line x1="420" y1="226" x2="422" y2="233" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
+
+          {/* Bow wake spray */}
+          <path d="M545,315 Q565,305 580,310 Q565,318 545,320 Z" fill="rgba(165,180,252,0.12)" />
+          <path d="M548,318 Q570,310 585,316" stroke="rgba(165,180,252,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+          {/* Stern flag */}
+          <line x1="220" y1="285" x2="220" y2="270" stroke="#94a3b8" strokeWidth="1.5" />
+          <path d="M220,270 L235,274 L220,278 Z" fill="#6366f1" />
         </g>
         <g opacity="0.3">
           <line className="shimmer" x1="150" y1="340" x2="250" y2="340" stroke="#a5b4fc" strokeWidth="1.5" strokeLinecap="round" />
