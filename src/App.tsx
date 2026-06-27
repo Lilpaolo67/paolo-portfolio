@@ -332,10 +332,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="portrait-footer">
-                <span>LAT: 14.5995° N</span>
-                <span>LON: 120.9842° E</span>
-              </div>
+
             </div>
           </div>
         </div>
