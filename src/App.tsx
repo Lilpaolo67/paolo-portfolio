@@ -518,11 +518,11 @@ export default function App() {
           <div className="skills-grid">
             <div className="skill-card">
               <div className="skill-icon-box">
-                <Ship size={24} />
+                <PropellerIcon size={24} />
               </div>
-              <h3 className="skill-title">Nautical Command</h3>
+              <h3 className="skill-title">Marine Power Systems</h3>
               <p className="skill-description">
-                Extensive experience directing teams in high-stress offshore conditions. Deep familiarity with shipboard mechanics, weather routing, and strict safety redundancies.
+                Operation and maintenance of ship engines, propulsion turbines, and heavy machinery. Experienced in thermal diagnostics, electrical distribution, and system safety.
               </p>
             </div>
 
