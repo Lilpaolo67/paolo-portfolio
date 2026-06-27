@@ -212,7 +212,7 @@ export default function App() {
   };
 
   const projects = [
-    { name: 'FUR Smart Feeder', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['IoT', 'App Control', 'Hardware'], link: 'https://homewizie.com' },
+    { name: 'FUR AI SMART FEEDER', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['IoT', 'App Control', 'Hardware'], link: 'https://fur.homewizie.com/' },
     { name: 'Homewizie B2B Platform', desc: 'Smart space integration platform for boutique hotels, premium residences, and corporate workspaces. Custom ambient tech deployments.', status: 'Live', tech: ['B2B', 'Smart Home', 'Enterprise'], link: 'https://homewizie.com' },
     { name: 'BREW Smart Coffee Hub', desc: 'Minimalist coffee machine with automatic bean detection, cup size sensing, and custom morning schedules.', status: 'In Development', tech: ['IoT', 'Sensors', 'Hardware'] },
     { name: 'AER Smart Purifier', desc: 'Fabric-wrapped air purifier with True HEPA H13 filtration, ultra-low power sleep mode, and organic light indicators.', status: 'Concept', tech: ['IoT', 'HEPA', 'Design'] },
