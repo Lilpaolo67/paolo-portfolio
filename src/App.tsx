@@ -247,7 +247,7 @@ export default function App() {
               </div>
               <div className="hero-identity">
                 <h1 className="gradient-text">Paolo Ando</h1>
-                <p className="hero-role">CEO &amp; Founder, Homewizie Â· Ex-Marine Engineer</p>
+                <p className="hero-role">CEO &amp; Founder, Homewizie · Marine Engineer</p>
               </div>
             </div>
 
