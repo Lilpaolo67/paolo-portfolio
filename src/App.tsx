@@ -1,728 +1,350 @@
-import { useState } from 'react';
-import { 
-  Ship, 
-  Compass, 
-  Wind, 
-  Coffee, 
-  Cpu, 
-  Sun, 
-  Moon,  
-  CheckCircle, 
-  Mail, 
-  ExternalLink,
-  ChevronRight,
-  Shield,
-  Smartphone,
-  Camera,
-  Layers,
-  Menu,
-  X,
-  MessageSquare,
-  Send
-} from 'lucide-react';
-import './App.css';
+﻿import { useState, useEffect, useRef } from 'react';
+import { Send, X, MessageSquare, Mail, ExternalLink, Download } from 'lucide-react';
+import './index.css';
 
-const PropellerIcon = ({ size = 20, className = "" }: { size?: number; className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    width={size} 
-    height={size} 
-    className={`propeller-icon ${className}`}
-  >
-    <circle cx="12" cy="12" r="3" fill="currentColor" />
-    <path d="M12 9c1.5-2.5 1-6-0.5-8-1 2.5-1 6 0.5 8z" fill="currentColor" />
-    <path d="M15 12c2.5 1.5 6 1 8-0.5-2.5-1-6-1 8 0.5z" fill="currentColor" />
-    <path d="M12 15c-1.5 2.5-1 6 0.5 8 1-2.5 1-6-0.5-8z" fill="currentColor" />
-    <path d="M9 12c-2.5-1.5-6-1-8 0.5 2.5 1 6 1 8-0.5z" fill="currentColor" />
-  </svg>
-);
-
-const AmbientWaves = () => {
+/* â”€â”€â”€ Animated Boat Scene â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const BoatScene = () => {
+  const stars = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    left: `${(i * 37) % 100}%`,
+    top: `${(i * 17) % 55}%`,
+    delay: `${((i * 0.3) % 3).toFixed(2)}s`,
+    duration: `${(2 + (i % 3)).toFixed(2)}s`,
+    size: `${(1 + (i % 2)).toFixed(1)}px`,
+  }));
   return (
-    <div className="ambient-waves">
-      <div className="ambient-wave top-wave">
-        <svg viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
-          <defs>
-            <path id="ambient-wave-path" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
-          </defs>
-          <g className="parallax">
-            <use href="#ambient-wave-path" x="48" y="0" fill="rgba(56, 189, 248, 0.03)" />
-            <use href="#ambient-wave-path" x="48" y="3" fill="rgba(45, 212, 191, 0.02)" />
-          </g>
-        </svg>
-      </div>
-      <div className="ambient-wave mid-wave">
-        <svg viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
-          <g className="parallax">
-            <use href="#ambient-wave-path" x="48" y="0" fill="rgba(45, 212, 191, 0.02)" />
-            <use href="#ambient-wave-path" x="48" y="5" fill="rgba(56, 189, 248, 0.015)" />
-          </g>
-        </svg>
-      </div>
-      <div className="ambient-wave bottom-wave">
-        <svg viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
-          <g className="parallax">
-            <use href="#ambient-wave-path" x="48" y="0" fill="rgba(56, 189, 248, 0.04)" />
-            <use href="#ambient-wave-path" x="48" y="3" fill="rgba(45, 212, 191, 0.03)" />
-            <use href="#ambient-wave-path" x="48" y="5" fill="rgba(56, 189, 248, 0.02)" />
-          </g>
-        </svg>
-      </div>
+    <div className="boat-scene">
+      {stars.map(s => (
+        <div key={s.id} className="star" style={{ left: s.left, top: s.top, animationDelay: s.delay, animationDuration: s.duration, width: s.size, height: s.size }} />
+      ))}
+      <div className="moon" />
+      <div className="horizon-glow" />
+      <svg className="ocean-svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0a0520" />
+            <stop offset="60%" stopColor="#0f0a2e" />
+            <stop offset="100%" stopColor="#1a1040" />
+          </linearGradient>
+          <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0d2060" />
+            <stop offset="100%" stopColor="#050d30" />
+          </linearGradient>
+          <linearGradient id="hullGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e1b4b" />
+            <stop offset="100%" stopColor="#0f0c2e" />
+          </linearGradient>
+          <linearGradient id="sailGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#f8f8ff" />
+            <stop offset="100%" stopColor="#c7d2fe" />
+          </linearGradient>
+          <filter id="portGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+          <clipPath id="seaClip"><rect x="0" y="270" width="800" height="230" /></clipPath>
+        </defs>
+        <rect width="800" height="500" fill="url(#skyGrad)" />
+        <ellipse cx="400" cy="340" rx="25" ry="120" fill="rgba(167,139,250,0.06)" />
+        <rect x="0" y="270" width="800" height="230" fill="url(#seaGrad)" />
+        <g clipPath="url(#seaClip)">
+          <path className="wave wave1" d="M-100,280 Q50,265 200,280 Q350,295 500,280 Q650,265 800,280 Q950,295 1100,280 L1100,500 L-100,500 Z" fill="rgba(99,102,241,0.12)" />
+          <path className="wave wave2" d="M-100,295 Q100,280 300,295 Q500,310 700,295 Q900,280 1100,295 L1100,500 L-100,500 Z" fill="rgba(99,102,241,0.10)" />
+          <path className="wave wave3" d="M-100,308 Q150,295 400,308 Q650,321 900,308 Q1050,295 1200,308 L1200,500 L-100,500 Z" fill="rgba(67,56,202,0.15)" />
+        </g>
+        <g className="boat-bob">
+          <path d="M270,305 Q290,325 400,328 Q510,325 530,305 L510,300 Q400,315 290,300 Z" fill="url(#hullGrad)" stroke="#4338ca" strokeWidth="1.5" />
+          <path d="M290,300 Q400,310 510,300" stroke="#6366f1" strokeWidth="2" fill="none" opacity="0.7" />
+          <rect x="310" y="292" width="180" height="10" rx="3" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
+          <line x1="400" y1="295" x2="400" y2="170" stroke="#e2e8f0" strokeWidth="2.5" />
+          <path d="M400,175 L400,290 L460,260 Z" fill="url(#sailGrad)" opacity="0.92" />
+          <path d="M400,200 L400,285 L340,255 Z" fill="white" opacity="0.75" />
+          <path d="M400,170 L400,180 L415,175 Z" fill="#6366f1" />
+          <line x1="400" y1="175" x2="460" y2="295" stroke="rgba(226,232,240,0.3)" strokeWidth="1" />
+          <line x1="400" y1="175" x2="340" y2="295" stroke="rgba(226,232,240,0.3)" strokeWidth="1" />
+          <rect x="388" y="275" width="8" height="16" rx="2" fill="#818cf8" />
+          <circle cx="392" cy="272" r="5" fill="#a5b4fc" />
+          <path d="M396,280 Q408,272 412,268" stroke="#818cf8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          <line x1="390" y1="291" x2="388" y2="298" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
+          <line x1="394" y1="291" x2="396" y2="298" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="360" cy="310" r="5" fill="none" stroke="#6366f1" strokeWidth="1.5" filter="url(#portGlow)" />
+          <circle cx="360" cy="310" r="2.5" fill="rgba(99,102,241,0.4)" />
+          <circle cx="440" cy="310" r="5" fill="none" stroke="#6366f1" strokeWidth="1.5" filter="url(#portGlow)" />
+          <circle cx="440" cy="310" r="2.5" fill="rgba(99,102,241,0.4)" />
+        </g>
+        <g opacity="0.3">
+          <line className="shimmer" x1="150" y1="340" x2="250" y2="340" stroke="#a5b4fc" strokeWidth="1.5" strokeLinecap="round" />
+          <line className="shimmer shimmer2" x1="540" y1="355" x2="630" y2="355" stroke="#a5b4fc" strokeWidth="1" strokeLinecap="round" />
+          <line className="shimmer shimmer3" x1="100" y1="370" x2="180" y2="370" stroke="#a5b4fc" strokeWidth="1" strokeLinecap="round" />
+          <line className="shimmer" x1="600" y1="380" x2="700" y2="380" stroke="#a5b4fc" strokeWidth="1.5" strokeLinecap="round" />
+        </g>
+      </svg>
+      <div className="scene-bottom-fade" />
     </div>
   );
 };
 
-interface Product {
-  id: string;
-  name: string;
-  status: 'Launched' | 'In Development' | 'Concept';
-  desc: string;
-  longDesc: string;
-  icon: React.ReactNode;
-  specs: string[];
-}
+/* â”€â”€â”€ Loading Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const LoadingScreen = ({ visible }: { visible: boolean }) => (
+  <div className={`loading-screen ${visible ? '' : 'loading-screen--hidden'}`}>
+    <div className="loading-spinner-wrap">
+      <div className="loading-ring" />
+      <div className="loading-ring-spin" />
+    </div>
+    <p className="loading-text">LOADING</p>
+  </div>
+);
 
+/* â”€â”€â”€ GitHub Calendar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const GitHubCalendar = () => (
+  <div className="github-calendar-floating">
+    <h3 className="gh-cal-title">
+      <svg role="img" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ color: '#6366f1', flexShrink: 0 }}>
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+      </svg>
+      GitHub Contributions
+    </h3>
+    <div className="gh-cal-img-wrap">
+      <img src="https://ghchart.rshah.org/6366f1/Lilpaolo67" alt="Lilpaolo67 GitHub Contributions" style={{ width: '100%', height: 'auto', display: 'block' }} />
+    </div>
+  </div>
+);
+
+/* â”€â”€â”€ Main App â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function App() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [activeProduct, setActiveProduct] = useState<string>('feeder');
-  const [spinDegree, setSpinDegree] = useState<number>(0);
-  const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  
-  const [chatOpen, setChatOpen] = useState<boolean>(false);
-  const [chatInput, setChatInput] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+  const [ready, setReady] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState('');
   const [chatMessages, setChatMessages] = useState<Array<{ role: 'assistant' | 'user'; content: string }>>([
     { role: 'assistant', content: "Hi! I'm Paolo's virtual assistant. Ask me anything about his Marine Engineering background, Homewizie B2B integrations, or how to work together!" }
   ]);
-  const [chatLoading, setChatLoading] = useState<boolean>(false);
+  const [chatLoading, setChatLoading] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formSent, setFormSent] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSendChatMessage = async (text: string) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setTimeout(() => setReady(true), 300);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
+  const sendChat = async (text: string) => {
     if (!text.trim()) return;
-    
-    const newMessages = [...chatMessages, { role: 'user' as const, content: text }];
-    setChatMessages(newMessages);
+    const msgs = [...chatMessages, { role: 'user' as const, content: text }];
+    setChatMessages(msgs);
     setChatLoading(true);
     setChatInput('');
-
     try {
-      const response = await fetch('/api/chat', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text }),
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to get response');
-      }
-
-      const data = await response.json();
-      setChatMessages([...newMessages, { role: 'assistant' as const, content: data.response }]);
-    } catch (error) {
-      console.error(error);
-      setChatMessages([...newMessages, { role: 'assistant' as const, content: "Sorry, I'm having trouble connecting to the ship's bridge right now. Please try again later or contact Paolo directly at paolo@homewizie.com!" }]);
+      const data = await res.json();
+      setChatMessages([...msgs, { role: 'assistant' as const, content: data.response }]);
+    } catch {
+      setChatMessages([...msgs, { role: 'assistant' as const, content: "Sorry, I'm unavailable right now. Email Paolo at paolo@homewizie.com!" }]);
     } finally {
       setChatLoading(false);
     }
   };
 
-  const handleChatSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleSendChatMessage(chatInput);
-  };
-
-  const handleSendSuggestion = (text: string) => {
-    handleSendChatMessage(text);
-  };
-
-  // Theme Toggle Effect
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
-
-  // Compass spin effect
-  const handleCompassClick = () => {
-    setSpinDegree(prev => prev + 360 + Math.random() * 180);
-  };
-
-  // Contact Form Submission
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setContactSubmitted(true);
-    }
-  };
-
-  const products: Product[] = [
-    {
-      id: 'feeder',
-      name: 'FUR Smart Feeder',
-      status: 'Launched',
-      desc: 'Elegant pet care device featuring sealed food storage and companion camera.',
-      longDesc: 'A design-first automatic pet feeder created to merge seamlessly into modern living rooms. Features airtight food fresh-locking mechanisms, micro-gram portion accuracy, and an ultra-wide angle HD night-vision camera for continuous reassurance.',
-      icon: <Camera className="product-icon" size={24} />,
-      specs: ['1080p camera with two-way audio', 'Double-lock food preservation', 'Backup battery power system', 'Homewizie App control']
-    },
-    {
-      id: 'coffee',
-      name: 'BREW Smart Coffee Hub',
-      status: 'In Development',
-      desc: 'Minimalist coffee machine with automatic bean detection and customized schedules.',
-      longDesc: 'Engineered for coffee purists who value visual serenity. Designed as an ambient, stone-textured fixture. Detects cup size and bean type via weight sensors, pre-heating and custom-extracting on schedule for calmer mornings.',
-      icon: <Coffee className="product-icon" size={24} />,
-      specs: ['Precision thermal block system', 'Integrated burr grinder', 'Auto-scheduling & ambient status glow', 'Fits flush against backsplash']
-    },
-    {
-      id: 'purifier',
-      name: 'AER Smart Purifier',
-      status: 'Concept',
-      desc: 'Ambient, fabric-wrapped air filter with whisper-quiet operation and organic indicator lights.',
-      longDesc: 'A sculptural take on home air purification. Wrapped in high-grade acoustic fabrics. Operates beneath 20dB to maintain auditory calm while using localized sensors to dynamically adapt to allergen spikes.',
-      icon: <Wind className="product-icon" size={24} />,
-      specs: ['True HEPA H13 filtration', 'Organic light indicator loop', 'Sound-absorbing fabric panels', 'Ultra-low power sleep state']
-    }
+  const projects = [
+    { name: 'FUR Smart Feeder', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['IoT', 'App Control', 'Hardware'], link: 'https://homewizie.com' },
+    { name: 'Homewizie B2B Platform', desc: 'Smart space integration platform for boutique hotels, premium residences, and corporate workspaces. Custom ambient tech deployments.', status: 'Live', tech: ['B2B', 'Smart Home', 'Enterprise'], link: 'https://homewizie.com' },
+    { name: 'BREW Smart Coffee Hub', desc: 'Minimalist coffee machine with automatic bean detection, cup size sensing, and custom morning schedules.', status: 'In Development', tech: ['IoT', 'Sensors', 'Hardware'] },
+    { name: 'AER Smart Purifier', desc: 'Fabric-wrapped air purifier with True HEPA H13 filtration, ultra-low power sleep mode, and organic light indicators.', status: 'Concept', tech: ['IoT', 'HEPA', 'Design'] },
   ];
 
-  const selectedProduct = products.find(p => p.id === activeProduct) || products[0];
+  const skills = ['Marine Engineering', 'B2B Sales', 'IoT Systems', 'Product Design', 'Smart Home Tech', 'Thermodynamics', 'Hardware', 'Strategic Planning', 'React', 'TypeScript', 'Node.js', 'AI Integration'];
 
   return (
-    <div className={`app-container ${theme}`}>
-      <AmbientWaves />
+    <>
+      <LoadingScreen visible={loading} />
 
-      {/* Main Split Layout */}
-      <div className="split-layout">
-        
-        {/* Left Sticky Sidebar */}
-        <aside className="sidebar-pane">
-          <div className="sidebar-sticky-content">
-            <div className="sidebar-header">
-              <a href="#hero" className="sidebar-logo">
-                <Compass 
-                  className="compass-logo" 
-                  size={28} 
-                  style={{ 
-                    transform: `rotate(${spinDegree}deg)`, 
-                    transition: 'transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                    cursor: 'pointer'
-                  }}
-                  onClick={handleCompassClick}
-                />
-                <span>Paolo Ando</span>
-              </a>
-              <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
-                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-            </div>
+      <main className={`portfolio-main ${ready ? 'portfolio-main--visible' : ''}`}>
 
-            <div className="sidebar-widget">
-              <div className="portrait-container">
-                <div className="portrait-photo">
-                  <div className="helm-wrapper">
-                    <img 
-                      src="/profile.jpg" 
-                      alt="Paolo Ando" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover', 
-                        borderRadius: '50%',
-                        border: '2px solid var(--card-border)'
-                      }} 
-                    />
-                  </div>
-                  <div className="status-text">
-                    <h3 className="status-name">Paolo Ando</h3>
-                    <p className="status-title">CEO, Homewizie</p>
+        {/* Left sticky panel with animated boat */}
+        <section className="left-panel">
+          <BoatScene />
+          <div className="left-panel-shadow-bottom" />
+        </section>
+
+        {/* Right scrollable content */}
+        <section className="right-panel">
+
+          {/* Hero */}
+          <div className="hero-section glass-warm">
+            <div className="hero-top">
+              <div className="profile-ring-wrap">
+                <div className="profile-ring">
+                  <div className="profile-img-inner">
+                    <img src="/profile.jpg" alt="Paolo Ando" className="profile-img" />
                   </div>
                 </div>
+              </div>
+              <div className="hero-identity">
+                <h1 className="gradient-text">Paolo Ando</h1>
+                <p className="hero-role">CEO &amp; Founder, Homewizie Â· Ex-Marine Engineer</p>
               </div>
             </div>
 
-            <nav className="sidebar-nav">
-              <a href="#hero" className="sidebar-link">Overview</a>
-              <a href="#journey" className="sidebar-link">The Voyage</a>
-              <a href="#homewizie" className="sidebar-link">Homewizie</a>
-              <a href="#skills" className="sidebar-link">Expertise</a>
-              <a href="#contact" className="sidebar-link">Start Engines</a>
-            </nav>
-          </div>
-        </aside>
-
-        {/* Right Scrollable Panel */}
-        <main className="content-pane">
-          {/* Mobile Header Menu */}
-          <header className="mobile-header-nav">
-            <div className="nav-container">
-              <a href="#hero" className="mobile-logo">
-                <Compass size={24} />
-                <span>Paolo Ando</span>
-              </a>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-                <button 
-                  className="mobile-menu-btn" 
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  aria-label="Toggle menu"
-                >
-                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-            </div>
-            
-            <div className={`mobile-dropdown ${mobileMenuOpen ? 'open' : ''}`}>
-              <a href="#hero" onClick={() => setMobileMenuOpen(false)}>Overview</a>
-              <a href="#journey" onClick={() => setMobileMenuOpen(false)}>The Voyage</a>
-              <a href="#homewizie" onClick={() => setMobileMenuOpen(false)}>Homewizie</a>
-              <a href="#skills" onClick={() => setMobileMenuOpen(false)}>Expertise</a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Start Engines</a>
-            </div>
-          </header>
-
-          <div className="content-scroll-wrapper">
-            {/* Hero Section */}
-            <section id="hero" className="hero-section">
-              <div className="hero-badge">
-                <Ship size={14} />
-                <span>Marine Engineering to CEO</span>
-              </div>
-              <h1 className="hero-title">
-                Scale the Market with<br />
-                Engineered Precision.
-              </h1>
-              <p className="hero-subtitle">
-                Used to be a Marine Engineer, where everything had to be perfect. Now, I use that same experience to fix technical problems. I don't just sell you an equipment, I provide reliable products and solve the issues that people face everyday. Work with us to unlock your full potential.
-              </p>
-
-              {/* GitHub Contributions Widget */}
-              <div className="github-chart-card">
-                <h4 className="chart-card-title">GitHub Activity</h4>
-                <div className="chart-wrapper">
-                  <img 
-                    src="https://ghchart.rshah.org/2dd4bf/Lilpaolo67" 
-                    alt="Lilpaolo67 GitHub Contributions"
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* The Journey Section */}
-            <section id="journey" className="section" style={{ background: 'rgba(255,255,255, 0.01)' }}>
-              <div className="section-header">
-                <span className="section-badge">The Logbook</span>
-                <h2 className="section-title">The Career Transition</h2>
-                <p className="section-desc">
-                  My journey from navigating vast oceanic currents to steering a design-led technology startup.
-                </p>
-              </div>
-
-              <div className="timeline">
-                {/* Sailor Item */}
-                <div className="timeline-item sea">
-                  <div className="timeline-node" />
-                  <div className="timeline-content">
-                    <div className="timeline-date">
-                      <PropellerIcon size={14} /> 2025 — 2026
-                    </div>
-                    <h3 className="timeline-role">Marine Systems Engineer</h3>
-                    <p className="timeline-company">Global Maritime Cargo Fleets</p>
-                    <p className="timeline-body">
-                      Directed operation and maintenance of gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew and implemented strict redundancy protocols under heavy sea conditions. Charted engineering courses where equipment failure was not an option, seeding my obsession with system resilience, thermodynamics, and structural efficiency now utilized at Homewizie.
-                    </p>
-                    <div className="timeline-tags">
-                      <span className="tag">Thermodynamics</span>
-                      <span className="tag">Propulsion Plants</span>
-                      <span className="tag">Hydraulic Systems</span>
-                      <span className="tag">Failure Redundancy</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CEO Item */}
-                <div className="timeline-item ceo">
-                  <div className="timeline-node" />
-                  <div className="timeline-content">
-                    <div className="timeline-date">
-                      <PropellerIcon size={14} /> 2026 — Present
-                    </div>
-                    <h3 className="timeline-role">CEO</h3>
-                    <p className="timeline-company">Homewizie Inc.</p>
-                    <p className="timeline-body">
-                      Steering Homewizie's strategic pivot toward high-ticket B2B sales and enterprise smart space integrations. Leading commercial partnerships with boutique hotels, premium residential developers, and smart workspace environments to deploy custom ambient technology systems at scale. Managing corporate relationships, contract negotiations, and the hardware-software B2B distribution pipeline.
-                    </p>
-                    <div className="timeline-tags">
-                      <span className="tag">B2B Enterprise</span>
-                      <span className="tag">High-Ticket Sales</span>
-                      <span className="tag">Smart Space Systems</span>
-                      <span className="tag">Key Account Dev</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Homewizie Showcase Section */}
-            <section id="homewizie" className="section">
-              <div className="section-header">
-                <span className="section-badge">The Venture</span>
-                <h2 className="section-title">B2B Smart Space Integrations</h2>
-                <p className="section-desc">
-                  Homewizie designs and deploys custom ambient technology systems for luxury hospitality, corporate workspaces, and high-end residential projects.
-                </p>
-              </div>
-
-              <div className="grid-2col">
-                {/* Brand Intro Card */}
-                <div className="brand-showcase">
-                  <h3 className="brand-logo-large">home<span>wizie</span></h3>
-                  <p className="brand-tagline">“Technology is best when it serves as ambient support, not constant distraction.”</p>
-                  <p className="brand-philosophy">
-                    We partner with high-end property developers, boutique hoteliers, and architects to deploy high-ticket ambient hardware solutions. By combining premium materials like stone and acoustic fabrics with industrial-grade reliability, we deliver custom smart ecosystems that elevate tenant satisfaction and guest wellness.
-                  </p>
-                  
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <span className="tag" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                      <Shield size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                      Enterprise Grade
-                    </span>
-                    <span className="tag" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                      <Layers size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                      B2B Smart Ecosystems
-                    </span>
-                    <span className="tag" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                      <Smartphone size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                      High-Ticket Integration
-                    </span>
-                  </div>
-                </div>
-
-                {/* Dynamic Product Selector */}
-                <div className="product-slider">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
-                    {products.map(p => (
-                      <div 
-                        key={p.id}
-                        onClick={() => setActiveProduct(p.id)}
-                        className={`product-card ${activeProduct === p.id ? 'active' : ''}`}
-                      >
-                        <div className="product-img-placeholder">
-                          {p.icon}
-                        </div>
-                        <div className="product-info">
-                          <div className="product-status-wrapper" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className={`product-status ${p.status === 'Launched' ? 'launched' : ''}`}>
-                              {p.status}
-                            </span>
-                          </div>
-                          <h4 className="product-name">{p.name}</h4>
-                          <p className="product-desc">{p.desc}</p>
-                        </div>
-                        <ChevronRight size={18} style={{ opacity: activeProduct === p.id ? 1 : 0.3, transition: '0.2s' }} />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Product Deep Detail Card */}
-                  <div 
-                    style={{ 
-                      background: 'rgba(255,255,255,0.02)', 
-                      border: '1px solid var(--card-border)', 
-                      borderRadius: '16px', 
-                      padding: '2rem',
-                      transition: 'opacity 0.3s ease-in-out'
-                    }}
-                  >
-                    <h4 style={{ fontSize: '1.3rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      {selectedProduct.name} Details
-                    </h4>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: '1.6' }}>
-                      {selectedProduct.longDesc}
-                    </p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                      {selectedProduct.specs.map((spec, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--text-color)' }}>
-                          <CheckCircle size={12} style={{ color: 'var(--accent)' }} />
-                          <span>{spec}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Expertise Section */}
-            <section id="skills" className="section" style={{ background: 'rgba(255,255,255,0.01)' }}>
-              <div className="section-header">
-                <span className="section-badge">Skill Set</span>
-                <h2 className="section-title">Core Competencies</h2>
-                <p className="section-desc">
-                  My skill set bridges physical navigation, industrial design leadership, and software/hardware alignment.
-                </p>
-              </div>
-
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <div className="skill-icon-box">
-                    <PropellerIcon size={24} />
-                  </div>
-                  <h3 className="skill-title">Marine Power Systems</h3>
-                  <p className="skill-description">
-                    Operation and maintenance of ship engines, propulsion turbines, and heavy machinery. Experienced in thermal diagnostics, electrical distribution, and system safety.
-                  </p>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-icon-box">
-                    <Layers size={24} />
-                  </div>
-                  <h3 className="skill-title">Design Philosophy</h3>
-                  <p className="skill-description">
-                    Rooted in functional minimalism. Designing consumer tech products by removing visual friction and focusing on tactile, ambient value.
-                  </p>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-icon-box">
-                    <Cpu size={24} />
-                  </div>
-                  <h3 className="skill-title">IoT & Electronics</h3>
-                  <p className="skill-description">
-                    Bridging app controls with hardware mechanics. Understanding smart cameras, airtight seals, motors, sensor feeds, and local network setups.
-                  </p>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-icon-box">
-                    <Compass size={24} />
-                  </div>
-                  <h3 className="skill-title">Strategic Execution</h3>
-                  <p className="skill-description">
-                    Coordinating capital raising, product supply chains, certification gates, and launching products from scratch into e-commerce ecosystems.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact" className="section">
-              <div className="section-header">
-                <span className="section-badge">Get in Touch</span>
-                <h2 className="section-title">Let's Connect</h2>
-                <p className="section-desc">
-                  Whether you want to discuss Homewizie projects, smart home ideas, marine systems, or business opportunities.
-                </p>
-              </div>
-
-              <div className="contact-grid">
-                <div className="contact-info">
-                  <div>
-                    <h3 className="contact-title-small">Let's Build Together</h3>
-                    <p className="contact-subtitle">
-                      Reach out directly or send a message using the form below. Let's make something great together.
-                    </p>
-                  </div>
-
-                  <div className="contact-method">
-                    <div className="contact-icon-box">
-                      <Mail size={20} />
-                    </div>
-                    <div className="contact-details">
-                      <h4>Email</h4>
-                      <p>paolo@homewizie.com</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="contact-card">
-                  {contactSubmitted ? (
-                    <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                      <CheckCircle size={48} style={{ color: 'var(--accent)', marginBottom: '1.5rem', display: 'inline-block' }} />
-                      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Message Sent</h3>
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                        Thank you, {formData.name}. Your message was sent successfully. I will read it and reply as soon as possible.
-                      </p>
-                      <button 
-                        onClick={() => { setContactSubmitted(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}
-                        className="btn-secondary"
-                        style={{ marginTop: '2rem' }}
-                      >
-                        Send Another Message
-                      </button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleFormSubmit}>
-                      <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input 
-                          type="text" 
-                          id="name" 
-                          className="form-input" 
-                          required 
-                          value={formData.name}
-                          onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                          placeholder="Your Name" 
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input 
-                          type="email" 
-                          id="email" 
-                          className="form-input" 
-                          required 
-                          value={formData.email}
-                          onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                          placeholder="your.email@domain.com" 
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="subject">Subject</label>
-                        <input 
-                          type="text" 
-                          id="subject" 
-                          className="form-input" 
-                          value={formData.subject}
-                          onChange={e => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                          placeholder="Business Partnership / Homewizie Question" 
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="message">Message</label>
-                        <textarea 
-                          id="message" 
-                          className="form-input" 
-                          required 
-                          value={formData.message}
-                          onChange={e => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                          placeholder="Write your message here..."
-                        />
-                      </div>
-
-                      <button type="submit" className="submit-btn">
-                        <span>Send Message</span>
-                        <PropellerIcon size={16} />
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            </section>
-
-            {/* Footer */}
-            <footer className="footer">
-              <div className="container footer-container">
-                <div className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontStyle: 'italic', fontWeight: 600 }}>
-                  <Compass size={18} style={{ color: 'var(--primary)' }} />
-                  <span>Paolo Ando &copy; {new Date().getFullYear()}</span>
-                </div>
-                
-                <p className="footer-copyright">
-                  Designed for Ambient Calmness & Maritime Resilience. All rights reserved.
-                </p>
-
-                <div className="footer-socials">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                      <rect x="2" y="9" width="4" height="12"></rect>
-                      <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                  </a>
-                  <a href="https://homewizie.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Homewizie Site">
-                    <ExternalLink size={20} />
+            <div className="hero-body">
+              <div className="hero-bio">
+                <p className="bio-primary">Marine Systems Engineer turned tech entrepreneur. I build smart ambient hardware that disappears into beautiful spaces.</p>
+                <p className="bio-secondary">From managing ship engines on trans-oceanic vessels to leading Homewizie's B2B smart space division â€” I bring industrial-grade reliability to premium consumer technology.</p>
+                <div className="hero-buttons">
+                  <button className="btn-3d" onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}>Get in touch</button>
+                  <a href="/resume.pdf" download className="btn-outline-3d">
+                    <Download size={14} />
+                    Download CV
                   </a>
                 </div>
               </div>
-            </footer>
+              <GitHubCalendar />
+            </div>
           </div>
-        </main>
 
-      </div>
+          {/* About */}
+          <div className="content-section">
+            <h2 className="section-heading">About</h2>
+            <p className="section-text">I started my career as a Marine Systems Engineer operating heavy propulsion plants and diesel engines on cargo vessels. That obsession with system precision and zero failure tolerance now drives how I build and sell technology. I founded Homewizie to deploy premium ambient smart devices for hotels, residences, and workspaces.</p>
+            <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
+            <div className="skills-chips">
+              {skills.map(s => <span key={s} className="skill-chip">{s}</span>)}
+            </div>
+          </div>
 
-      {/* Floating AI Chatbot */}
-      <button 
-        className="chatbot-float-btn" 
-        onClick={() => setChatOpen(!chatOpen)}
-        aria-label="Toggle chat"
-      >
+          {/* Experience */}
+          <div className="content-section">
+            <h2 className="section-heading">Experience</h2>
+            <div className="timeline-list">
+              <div className="timeline-entry">
+                <div className="timeline-dot" />
+                <div className="timeline-entry-body">
+                  <div className="timeline-header">
+                    <span className="timeline-role">CEO &amp; Founder</span>
+                    <span className="timeline-period">2026 â€” Present</span>
+                  </div>
+                  <span className="timeline-company">Homewizie Inc.</span>
+                  <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
+                  <div className="timeline-tags">
+                    <span className="tl-tag">B2B Enterprise</span>
+                    <span className="tl-tag">Smart Home</span>
+                    <span className="tl-tag">High-Ticket Sales</span>
+                    <span className="tl-tag">Product Launch</span>
+                  </div>
+                </div>
+              </div>
+              <div className="timeline-entry">
+                <div className="timeline-dot" />
+                <div className="timeline-entry-body">
+                  <div className="timeline-header">
+                    <span className="timeline-role">Marine Systems Engineer</span>
+                    <span className="timeline-period">2025 â€” 2026</span>
+                  </div>
+                  <span className="timeline-company">Global Maritime Cargo Fleets</span>
+                  <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
+                  <div className="timeline-tags">
+                    <span className="tl-tag">Thermodynamics</span>
+                    <span className="tl-tag">Propulsion Plants</span>
+                    <span className="tl-tag">Hydraulic Systems</span>
+                    <span className="tl-tag">System Safety</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Projects */}
+          <div className="content-section">
+            <h2 className="section-heading">Projects</h2>
+            <div className="projects-grid">
+              {projects.map(p => (
+                <div key={p.name} className="project-card glass-warm">
+                  <div className="project-card-top">
+                    <div>
+                      <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
+                      <h3 className="project-name">{p.name}</h3>
+                    </div>
+                    {p.link && (
+                      <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
+                        <ExternalLink size={16} />
+                      </a>
+                    )}
+                  </div>
+                  <p className="project-desc">{p.desc}</p>
+                  <div className="project-tech">
+                    {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div className="content-section" id="contact-section">
+            <h2 className="section-heading">Get in Touch</h2>
+            <p className="section-text">Whether it's a Homewizie project, smart space deployment, or business opportunity â€” reach out directly.</p>
+            <div className="contact-row">
+              <a href="mailto:paolo@homewizie.com" className="contact-email-link"><Mail size={16} />paolo@homewizie.com</a>
+              <a href="https://homewizie.com" target="_blank" rel="noopener noreferrer" className="contact-email-link"><ExternalLink size={16} />homewizie.com</a>
+            </div>
+            {formSent ? (
+              <div className="form-success glass-warm"><p>âœ… Message sent! I'll get back to you soon.</p></div>
+            ) : (
+              <form className="contact-form glass-warm" onSubmit={e => { e.preventDefault(); if (formData.name && formData.email && formData.message) setFormSent(true); }}>
+                <div className="form-row">
+                  <div className="form-field"><label>Name</label><input type="text" required placeholder="Your Name" value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} /></div>
+                  <div className="form-field"><label>Email</label><input type="email" required placeholder="your@email.com" value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} /></div>
+                </div>
+                <div className="form-field"><label>Message</label><textarea required placeholder="What's on your mind?" rows={5} value={formData.message} onChange={e => setFormData(p => ({ ...p, message: e.target.value }))} /></div>
+                <button type="submit" className="btn-3d">Send Message</button>
+              </form>
+            )}
+          </div>
+
+          <footer className="portfolio-footer">
+            <p>Paolo Ando Â© {new Date().getFullYear()} Â· Built with precision, engineered for calm.</p>
+          </footer>
+        </section>
+      </main>
+
+      {/* AI Chatbot */}
+      <button className="chatbot-float-btn" onClick={() => setChatOpen(!chatOpen)} aria-label="Toggle chat">
         {chatOpen ? <X size={22} /> : <MessageSquare size={22} />}
       </button>
-
       <div className={`chatbot-panel ${chatOpen ? 'open' : ''}`}>
         <div className="chat-header">
           <div className="chat-header-info">
-            <div className="chat-avatar">
-              <Compass size={16} className="propeller-icon" style={{ animation: 'spin 20s linear infinite' }} />
-            </div>
-            <div>
-              <div className="chat-title">Paolo's Assistant</div>
-              <div className="chat-status">Online</div>
-            </div>
+            <div className="chat-avatar"><div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} /></div>
+            <div><div className="chat-title">Paolo's Assistant</div><div className="chat-status">Online</div></div>
           </div>
-          <button className="chat-close-btn" onClick={() => setChatOpen(false)} aria-label="Close chat">
-            <X size={18} />
-          </button>
+          <button className="chat-close-btn" onClick={() => setChatOpen(false)} aria-label="Close chat"><X size={18} /></button>
         </div>
-
         <div className="chat-messages">
-          {chatMessages.map((msg, i) => (
-            <div key={i} className={`chat-bubble ${msg.role}`}>
-              {msg.content}
-            </div>
-          ))}
-          {chatLoading && (
-            <div className="chat-bubble assistant">
-              <div className="loading-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          )}
+          {chatMessages.map((msg, i) => <div key={i} className={`chat-bubble ${msg.role}`}>{msg.content}</div>)}
+          {chatLoading && <div className="chat-bubble assistant"><div className="loading-dots"><span /><span /><span /></div></div>}
+          <div ref={messagesEndRef} />
         </div>
-
         <div className="chat-suggestions">
-          <button className="suggestion-chip" onClick={() => handleSendSuggestion("What is Homewizie's B2B model?")}>
-            What is Homewizie's B2B model?
-          </button>
-          <button className="suggestion-chip" onClick={() => handleSendSuggestion("Tell me about Paolo's engineering background.")}>
-            Tell me about Paolo's engineering background.
-          </button>
-          <button className="suggestion-chip" onClick={() => handleSendSuggestion("How can I partner with Homewizie?")}>
-            How can I partner with Homewizie?
-          </button>
+          <button className="suggestion-chip" onClick={() => sendChat("What is Homewizie's B2B model?")}>Homewizie B2B?</button>
+          <button className="suggestion-chip" onClick={() => sendChat("Tell me about Paolo's engineering background.")}>Engineering background?</button>
+          <button className="suggestion-chip" onClick={() => sendChat("How can I partner with Homewizie?")}>Partner with Homewizie?</button>
         </div>
-
-        <form onSubmit={handleChatSubmit} className="chat-input-form">
-          <input 
-            type="text" 
-            className="chat-input" 
-            placeholder="Ask anything..." 
-            value={chatInput}
-            onChange={(e) => setChatInput(e.target.value)}
-            disabled={chatLoading}
-          />
-          <button type="submit" className="chat-send-btn" disabled={chatLoading} aria-label="Send message">
-            <Send size={16} />
-          </button>
+        <form onSubmit={e => { e.preventDefault(); sendChat(chatInput); }} className="chat-input-form">
+          <input type="text" className="chat-input" placeholder="Ask anything..." value={chatInput} onChange={e => setChatInput(e.target.value)} disabled={chatLoading} />
+          <button type="submit" className="chat-send-btn" disabled={chatLoading} aria-label="Send message"><Send size={16} /></button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
