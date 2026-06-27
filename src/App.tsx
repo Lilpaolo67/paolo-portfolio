@@ -9,7 +9,6 @@ import {
   Moon,  
   CheckCircle, 
   Mail, 
-  MapPin, 
   ExternalLink,
   ChevronRight,
   Shield,
@@ -545,15 +544,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="contact-method">
-                <div className="contact-icon-box">
-                  <MapPin size={20} />
-                </div>
-                <div className="contact-details">
-                  <h4>Based in</h4>
-                  <p>Manila, Philippines (Maritime Hub)</p>
-                </div>
-              </div>
+
             </div>
 
             {/* Form Column */}
