@@ -159,7 +159,7 @@ const GitHubCalendar = () => (
       GitHub Contributions
     </h3>
     <div className="gh-cal-img-wrap">
-      <img src="https://ghchart.rshah.org/6366f1/Lilpaolo67" alt="Lilpaolo67 GitHub Contributions" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <img src="https://ghchart.rshah.org/ec4899/Lilpaolo67" alt="Lilpaolo67 GitHub Contributions" style={{ width: '100%', height: 'auto', display: 'block' }} />
     </div>
   </div>
 );
@@ -247,7 +247,7 @@ export default function App() {
               </div>
               <div className="hero-identity">
                 <h1 className="gradient-text">Paolo Ando</h1>
-                <p className="hero-role">CEO &amp; Founder, Homewizie · Marine Engineer</p>
+                <p className="hero-role">Full Stack Ecom B2B and DTC Partner📈</p>
               </div>
             </div>
 
