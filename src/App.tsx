@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send, X, MessageSquare, Mail, ExternalLink, Download } from 'lucide-react';
 import './index.css';
 
@@ -112,8 +112,16 @@ const BoatScene = () => {
           <rect x="415" y="213" width="7" height="13" rx="2" fill="#f472b6" />
           {/* Head */}
           <circle cx="418" cy="210" r="4.5" fill="#f9a8d4" />
-          {/* Arm waving */}
-          <path d="M422,217 Q433,209 437,205" stroke="#f472b6" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          {/* Arm holding flag pole up */}
+          <line x1="422" y1="216" x2="438" y2="196" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Flag pole */}
+          <line x1="438" y1="196" x2="438" y2="178" stroke="#e2e8f0" strokeWidth="1.8" />
+          {/* Flag banner */}
+          <rect x="438" y="178" width="32" height="13" rx="2" fill="#ec4899" />
+          {/* SCALE text on flag */}
+          <text x="454" y="188" textAnchor="middle" fontSize="6" fontWeight="bold" fill="white" fontFamily="Arial, sans-serif">SCALE</text>
+          {/* Flag tip */}
+          <circle cx="438" cy="178" r="1.5" fill="#f9a8d4" />
           {/* Legs */}
           <line x1="416" y1="226" x2="414" y2="233" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" />
           <line x1="420" y1="226" x2="422" y2="233" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" />
@@ -247,14 +255,13 @@ export default function App() {
               </div>
               <div className="hero-identity">
                 <h1 className="gradient-text">Paolo Ando</h1>
-                <p className="hero-role">Full Stack Ecom B2B and DTC PartnerðŸ“ˆ</p>
+                <p className="hero-role">Full Stack Ecom B2B and DTC Partner📈</p>
               </div>
             </div>
 
             <div className="hero-body">
               <div className="hero-bio">
-                <p className="bio-primary">Marine Systems Engineer turned tech entrepreneur. I build smart ambient hardware that disappears into beautiful spaces.</p>
-                <p className="bio-secondary">From managing ship engines on trans-oceanic vessels to leading Homewizie's B2B smart space division Ã¢â‚¬â€ I bring industrial-grade reliability to premium consumer technology.</p>
+                <p className="bio-primary">Full Stack E-commerce B2B and DTC Partner. I build and grow B2B and DTC brands by connecting professional supply chain logistics with direct-to-customer sales.</p>
                 <div className="hero-buttons">
                   <button className="btn-3d" onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}>Get in touch</button>
                   <a href="/resume.pdf" download className="btn-outline-3d">
@@ -286,7 +293,7 @@ export default function App() {
                 <div className="timeline-entry-body">
                   <div className="timeline-header">
                     <span className="timeline-role">CEO &amp; Founder</span>
-                    <span className="timeline-period">2026 Ã¢â‚¬â€ Present</span>
+                    <span className="timeline-period">2026 to Present</span>
                   </div>
                   <span className="timeline-company">Homewizie Inc.</span>
                   <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
@@ -303,7 +310,7 @@ export default function App() {
                 <div className="timeline-entry-body">
                   <div className="timeline-header">
                     <span className="timeline-role">Marine Systems Engineer</span>
-                    <span className="timeline-period">2025 Ã¢â‚¬â€ 2026</span>
+                    <span className="timeline-period">2025 to 2026</span>
                   </div>
                   <span className="timeline-company">Global Maritime Cargo Fleets</span>
                   <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
