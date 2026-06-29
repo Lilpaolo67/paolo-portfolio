@@ -373,11 +373,7 @@ export default function App() {
         },
         {
           name: 'Stripe',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#635BFF" style={{ marginRight: 6 }}>
-              <path d="M13.962 10.455c0-1.042-.74-1.564-1.922-1.564-1.464 0-2.31.547-2.31 1.564 0 1.58 2.124 1.3 2.124 2.378 0 1.096-.836 1.63-2.08 1.63-1.636 0-2.616-.628-2.616-1.724H5c0 2.23 1.83 3.633 4.412 3.633 2.926 0 4.55-1.436 4.55-3.633 0-2.528-2.124-2.126-2.124-3.328 0-.962.72-1.412 1.832-1.412 1.34 0 2.054.498 2.054 1.455h2.238z" />
-            </svg>
-          )
+          icon: <img src="/stripe.png" alt="Stripe" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         },
         {
           name: 'PayPal',
@@ -566,35 +562,19 @@ export default function App() {
       skills: [
         {
           name: 'Antigravity',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#ec4899" style={{ marginRight: 6 }}>
-              <path d="M12 2L2 22h4l3-6h6l3 6h4L12 2zm-2 11l2-4 2 4H10z" />
-            </svg>
-          )
+          icon: <img src="/antigravity.png" alt="Antigravity" style={{ width: 14, height: 14, marginRight: 6 }} />
         },
         {
           name: 'Codex',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
-              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">Cx</text>
-            </svg>
-          )
+          icon: <img src="/codex.png" alt="Codex" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         },
         {
           name: 'Cursor',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00E5FF" style={{ marginRight: 6 }}>
-              <polygon points="9,4 18,13 13,13 16,19 14,20 11,14 9,16" />
-            </svg>
-          )
+          icon: <img src="/cursor.png" alt="Cursor" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         },
         {
           name: 'Windsurf',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3B82F6" style={{ marginRight: 6 }}>
-              <polygon points="12,2 22,22 12,18 2,22" />
-            </svg>
-          )
+          icon: <img src="/windsurf.png" alt="Windsurf" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         }
       ]
     }
