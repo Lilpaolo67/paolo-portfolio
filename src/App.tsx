@@ -537,35 +537,27 @@ export default function App() {
       skills: [
         {
           name: 'Antigravity',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#ec4899" style={{ marginRight: 6 }}>
-              <path d="M12 2L2 22h4l3-6h6l3 6h4L12 2zm-2 11l2-4 2 4H10z" />
-            </svg>
-          )
+          icon: <img src="/antigravity.png" alt="Antigravity" style={{ width: 14, height: 14, marginRight: 6 }} />
         },
         {
           name: 'Codex',
           icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
-              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">Cx</text>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10a37f" style={{ marginRight: 6 }}>
+              <path d="M21.74 11.23a5.22 5.22 0 0 0-1.89-3.79 5.38 5.38 0 0 0-.25-5.35c-1.39-2.28-4.22-3-6.53-1.63a5.21 5.21 0 0 0-4.8 0c-2.3-1.37-5.14-.65-6.53 1.63a5.41 5.41 0 0 0-.25 5.35 5.21 5.21 0 0 0-1.89 3.79c0 2.22 1.34 4.14 3.32 4.88a5.36 5.36 0 0 0 .25 5.35c1.39 2.28 4.22 3 6.53 1.63a5.22 5.22 0 0 0 4.8 0c2.3 1.37 5.14.65 6.53-1.63a5.36 5.36 0 0 0 .25-5.35c2-.74 3.34-2.66 3.34-4.88z" />
             </svg>
           )
         },
         {
           name: 'Cursor',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00E5FF" style={{ marginRight: 6 }}>
-              <polygon points="9,4 18,13 13,13 16,19 14,20 11,14 9,16" />
-            </svg>
-          )
+          icon: <img src="/cursor.png" alt="Cursor" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         },
         {
           name: 'Windsurf',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3B82F6" style={{ marginRight: 6 }}>
-              <polygon points="12,2 22,22 12,18 2,22" />
-            </svg>
-          )
+          icon: <img src="/windsurf.png" alt="Windsurf" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
+        },
+        {
+          name: 'Make.com',
+          icon: <img src="/make.png" alt="Make.com" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         }
       ]
     }
