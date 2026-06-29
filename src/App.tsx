@@ -186,6 +186,7 @@ export default function App() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formSent, setFormSent] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'experience' | 'skills' | 'projects'>('experience');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -646,112 +647,142 @@ export default function App() {
             </div>
           </div>
 
-          {/* About */}
-          <div className="content-section">
-            <h2 className="section-heading">About</h2>
-            <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
-            <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
+          {/* Navigation Tabs */}
+          <div className="portfolio-tabs">
+            <button
+              onClick={() => setActiveTab('experience')}
+              className={`tab-btn ${activeTab === 'experience' ? 'active' : ''}`}
+            >
+              Experience
+            </button>
+            <button
+              onClick={() => setActiveTab('skills')}
+              className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
+            >
+              Skills
+            </button>
+            <button
+              onClick={() => setActiveTab('projects')}
+              className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
+            >
+              Projects
+            </button>
           </div>
 
-          {/* Skills & Tools */}
-          <div className="content-section">
-            <h2 className="section-heading">Skills & Tools</h2>
-            <p className="section-text" style={{ marginBottom: '1.25rem' }}>
-              Technologies and platforms I work with. Click any skill below to highlight related projects.
-            </p>
-            <div className="skills-categories-grid">
-              {skillCategories.map(cat => (
-                <div key={cat.title} className="skills-category-card glass-warm">
-                  <h3 className="skills-category-title">{cat.title}</h3>
-                  <div className="skills-items-wrap">
-                    {cat.skills.map(skill => {
-                      const isSelected = selectedSkill === skill.name;
-                      return (
-                        <button
-                          key={skill.name}
-                          onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
-                          className={`skill-interactive-btn ${isSelected ? 'active' : ''}`}
-                        >
-                          {skill.icon}
-                          <span>{skill.name}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Experience */}
-          <div className="content-section">
-            <h2 className="section-heading">Experience</h2>
-            <div className="timeline-list">
-              <div className="timeline-entry">
-                <div className="timeline-dot" />
-                <div className="timeline-entry-body">
-                  <div className="timeline-header">
-                    <span className="timeline-role">CEO &amp; Founder</span>
-                    <span className="timeline-period">2026 to Present</span>
-                  </div>
-                  <span className="timeline-company">Homewizie Inc.</span>
-                  <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
-                  <div className="timeline-tags">
-                    <span className="tl-tag">B2B Enterprise</span>
-                    <span className="tl-tag">Smart Home</span>
-                    <span className="tl-tag">High-Ticket Sales</span>
-                    <span className="tl-tag">Product Launch</span>
-                  </div>
-                </div>
+          {activeTab === 'experience' && (
+            <>
+              {/* About */}
+              <div className="content-section">
+                <h2 className="section-heading">About</h2>
+                <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
+                <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
               </div>
-              <div className="timeline-entry">
-                <div className="timeline-dot" />
-                <div className="timeline-entry-body">
-                  <div className="timeline-header">
-                    <span className="timeline-role">Marine Systems Engineer</span>
-                    <span className="timeline-period">2025 to 2026</span>
-                  </div>
-                  <span className="timeline-company">Global Maritime Cargo Fleets</span>
-                  <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
-                  <div className="timeline-tags">
-                    <span className="tl-tag">Thermodynamics</span>
-                    <span className="tl-tag">Propulsion Plants</span>
-                    <span className="tl-tag">Hydraulic Systems</span>
-                    <span className="tl-tag">System Safety</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Projects */}
-          <div className="content-section">
-            <h2 className="section-heading">Projects</h2>
-            <div className="projects-grid">
-              {projects.map(p => {
-                const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
-                return (
-                  <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
-                    <div className="project-card-top">
-                      <div>
-                        <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
-                        <h3 className="project-name">{p.name}</h3>
+              {/* Experience */}
+              <div className="content-section">
+                <h2 className="section-heading">Experience</h2>
+                <div className="timeline-list">
+                  <div className="timeline-entry">
+                    <div className="timeline-dot" />
+                    <div className="timeline-entry-body">
+                      <div className="timeline-header">
+                        <span className="timeline-role">CEO &amp; Founder</span>
+                        <span className="timeline-period">2026 to Present</span>
                       </div>
-                      {p.link && (
-                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
-                          <ExternalLink size={16} />
-                        </a>
-                      )}
-                    </div>
-                    <p className="project-desc">{p.desc}</p>
-                    <div className="project-tech">
-                      {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                      <span className="timeline-company">Homewizie Inc.</span>
+                      <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
+                      <div className="timeline-tags">
+                        <span className="tl-tag">B2B Enterprise</span>
+                        <span className="tl-tag">Smart Home</span>
+                        <span className="tl-tag">High-Ticket Sales</span>
+                        <span className="tl-tag">Product Launch</span>
+                      </div>
                     </div>
                   </div>
-                );
-              })}
+                  <div className="timeline-entry">
+                    <div className="timeline-dot" />
+                    <div className="timeline-entry-body">
+                      <div className="timeline-header">
+                        <span className="timeline-role">Marine Systems Engineer</span>
+                        <span className="timeline-period">2025 to 2026</span>
+                      </div>
+                      <span className="timeline-company">Global Maritime Cargo Fleets</span>
+                      <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
+                      <div className="timeline-tags">
+                        <span className="tl-tag">Thermodynamics</span>
+                        <span className="tl-tag">Propulsion Plants</span>
+                        <span className="tl-tag">Hydraulic Systems</span>
+                        <span className="tl-tag">System Safety</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'skills' && (
+            /* Skills & Tools */
+            <div className="content-section">
+              <h2 className="section-heading">Skills & Tools</h2>
+              <p className="section-text" style={{ marginBottom: '1.25rem' }}>
+                Technologies and platforms I work with. Click any skill below to highlight related projects in the Projects tab.
+              </p>
+              <div className="skills-categories-grid">
+                {skillCategories.map(cat => (
+                  <div key={cat.title} className="skills-category-card glass-warm">
+                    <h3 className="skills-category-title">{cat.title}</h3>
+                    <div className="skills-items-wrap">
+                      {cat.skills.map(skill => {
+                        const isSelected = selectedSkill === skill.name;
+                        return (
+                          <button
+                            key={skill.name}
+                            onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
+                            className={`skill-interactive-btn ${isSelected ? 'active' : ''}`}
+                          >
+                            {skill.icon}
+                            <span>{skill.name}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {activeTab === 'projects' && (
+            /* Projects */
+            <div className="content-section">
+              <h2 className="section-heading">Projects</h2>
+              <div className="projects-grid">
+                {projects.map(p => {
+                  const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
+                  return (
+                    <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
+                      <div className="project-card-top">
+                        <div>
+                          <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
+                          <h3 className="project-name">{p.name}</h3>
+                        </div>
+                        {p.link && (
+                          <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
+                            <ExternalLink size={16} />
+                          </a>
+                        )}
+                      </div>
+                      <p className="project-desc">{p.desc}</p>
+                      <div className="project-tech">
+                        {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Contact */}
           <div className="content-section" id="contact-section">
