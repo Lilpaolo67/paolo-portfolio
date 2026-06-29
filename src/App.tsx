@@ -259,6 +259,15 @@ export default function App() {
           )
         },
         {
+          name: 'C',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00599C" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/>
+              <text x="7" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">C</text>
+            </svg>
+          )
+        },
+        {
           name: 'HTML',
           icon: (
             <svg viewBox="0 0 24 24" width="14" height="14" fill="#E34F26" style={{ marginRight: 6 }}>
@@ -271,119 +280,6 @@ export default function App() {
           icon: (
             <svg viewBox="0 0 24 24" width="14" height="14" fill="#1572B6" style={{ marginRight: 6 }}>
               <path d="M1.5 22L0 0h24l-1.5 22L12 24z M12 2.7v7.5h6.3L17.7 17l-5.7 1.6V21.3l8.8-2.4 1.2-13.6z M12 2.7L3.2 5.3l1.2 13.6 8.8 2.4V18.6l-5.7-1.6L7.2 13H12V10.2H5.3l-.2-2.7H12z" />
-            </svg>
-          )
-        },
-        {
-          name: 'SQL',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00758F" style={{ marginRight: 6 }}>
-              <path d="M12 2C6.48 2 2 4.02 2 6.5s4.48 4.5 10 4.5 10-2.02 10-4.5S17.52 2 12 2zm0 18c-5.52 0-10-2.02-10-4.5v-3c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v3c0 2.48-4.48 4.5-10 4.5zm0-6c-5.52 0-10-2.02-10-4.5v-3c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v3c0 2.48-4.48 4.5-10 4.5z" />
-            </svg>
-          )
-        }
-      ]
-    },
-    {
-      title: 'Databases & Services',
-      skills: [
-        {
-          name: 'PostgreSQL',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#336791" style={{ marginRight: 6 }}>
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.09 14.14c-.06.05-.12.09-.19.12-.4.18-.89.14-1.28-.12-.08-.05-.14-.11-.2-.18-.28-.31-.41-.72-.37-1.13.04-.41.22-.79.52-1.07.2-.18.46-.28.73-.28h.07c.56.03 1.05.39 1.21.93.12.4-.01.83-.32 1.13l-.47.6zM15 10.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5z" />
-            </svg>
-          )
-        },
-        {
-          name: 'MySQL',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00758F" style={{ marginRight: 6 }}>
-              <path d="M12.11 3C8.12 3 5 6.12 5 10c0 2.12.88 4.02 2.29 5.37L5.5 21h13l-1.79-5.63C18.12 14.02 19 12.12 19 10c0-3.88-3.12-7-6.89-7z" />
-            </svg>
-          )
-        },
-        {
-          name: 'Supabase',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3ECF8E" style={{ marginRight: 6 }}>
-              <path d="M18.235 10H12.5V3l-7 11h5.735v7z" />
-            </svg>
-          )
-        },
-        {
-          name: 'Stripe',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#635BFF" style={{ marginRight: 6 }}>
-              <path d="M13.962 10.455c0-1.042-.74-1.564-1.922-1.564-1.464 0-2.31.547-2.31 1.564 0 1.58 2.124 1.3 2.124 2.378 0 1.096-.836 1.63-2.08 1.63-1.636 0-2.616-.628-2.616-1.724H5c0 2.23 1.83 3.633 4.412 3.633 2.926 0 4.55-1.436 4.55-3.633 0-2.528-2.124-2.126-2.124-3.328 0-.962.72-1.412 1.832-1.412 1.34 0 2.054.498 2.054 1.455h2.238z" />
-            </svg>
-          )
-        },
-        {
-          name: 'PayPal',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#003087" style={{ marginRight: 6 }}>
-              <path d="M20.06 6.8c-.37-1.85-1.63-3.2-3.48-3.6C15.3 2.95 13.72 3 12.11 3H6c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M17.2 9.5c-.5 2.5-2.3 3.5-4.8 3.5H9.6L10.3 9h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#003087"/>
-              <path d="M17.06 7.8c-.37-1.85-1.63-3.2-3.48-3.6C12.3 3.95 10.72 4 9.11 4H3c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M14.2 10.5c-.5 2.5-2.3 3.5-4.8 3.5H6.6L7.3 10h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#0079C1" opacity="0.8"/>
-            </svg>
-          )
-        }
-      ]
-    },
-    {
-      title: 'Design Tools',
-      skills: [
-        {
-          name: 'Shopify',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#95BF47" style={{ marginRight: 6 }}>
-              <path d="M19.14 7.14l-1.92-4.8C17.04 1.62 16.2 1 15.24 1H8.76c-.96 0-1.8.62-1.98 1.34L4.86 7.14C4.32 7.38 4 7.92 4 8.52v12.24C4 21.98 5.02 23 6.26 23h11.48c1.24 0 2.26-1.02 2.26-2.24V8.52c0-.6-.32-1.14-.86-1.38zM12 3c.83 0 1.5.67 1.5 1.5S12.83 6 12 6s-1.5-.67-1.5-1.5S11.17 3 12 3zm4.5 15.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S14.17 17 15 17s1.5.67 1.5 1.5z" />
-            </svg>
-          )
-        },
-        {
-          name: 'Figma',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
-              <path d="M8.5 0C6 0 4 2 4 4.5S6 9 8.5 9H12V0H8.5z" fill="#F24E1E"/>
-              <path d="M15.5 0C13 0 11 2 11 4.5S13 9 15.5 9H19V0H15.5z" fill="#FF7262"/>
-              <path d="M8.5 9C6 9 4 11 4 13.5S6 18 8.5 18H12V9H8.5z" fill="#A259FF"/>
-              <path d="M4 22.5C4 20 6 18 8.5 18H12V22.5C12 25 10 27 8.5 27S4 25 4 22.5z" fill="#1ABC9C"/>
-              <path d="M15.5 9C18 9 20 11 20 13.5S18 18 15.5 18H12V9h3.5z" fill="#18A0FB"/>
-            </svg>
-          )
-        },
-        {
-          name: 'Canva',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00C4CC" style={{ marginRight: 6 }}>
-              <circle cx="12" cy="12" r="12" fill="url(#canvaGrad)"/>
-              <defs>
-                <linearGradient id="canvaGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#7d2ae8"/>
-                  <stop offset="100%" stopColor="#00c4cc"/>
-                </linearGradient>
-              </defs>
-              <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">C</text>
-            </svg>
-          )
-        },
-        {
-          name: 'Spline',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#FF5E62" strokeWidth="2.5" style={{ marginRight: 6 }}>
-              <path d="M4 12c4-8 12 8 16 0" strokeLinecap="round"/>
-            </svg>
-          )
-        },
-        {
-          name: 'Lucidchart',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F05A28" style={{ marginRight: 6 }}>
-              <rect x="2" y="9" width="6" height="6" rx="1"/>
-              <rect x="16" y="9" width="6" height="6" rx="1"/>
-              <line x1="8" y1="12" x2="16" y2="12" stroke="#F05A28" strokeWidth="2"/>
-              <polyline points="13,9 16,12 13,15" stroke="#F05A28" strokeWidth="2" fill="none"/>
             </svg>
           )
         }
@@ -441,6 +337,119 @@ export default function App() {
       ]
     },
     {
+      title: 'Databases & Services',
+      skills: [
+        {
+          name: 'PostgreSQL',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#336791" style={{ marginRight: 6 }}>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.09 14.14c-.06.05-.12.09-.19.12-.4.18-.89.14-1.28-.12-.08-.05-.14-.11-.2-.18-.28-.31-.41-.72-.37-1.13.04-.41.22-.79.52-1.07.2-.18.46-.28.73-.28h.07c.56.03 1.05.39 1.21.93.12.4-.01.83-.32 1.13l-.47.6zM15 10.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5z" />
+            </svg>
+          )
+        },
+        {
+          name: 'MySQL',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00758F" style={{ marginRight: 6 }}>
+              <path d="M12.11 3C8.12 3 5 6.12 5 10c0 2.12.88 4.02 2.29 5.37L5.5 21h13l-1.79-5.63C18.12 14.02 19 12.12 19 10c0-3.88-3.12-7-6.89-7z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Supabase',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3ECF8E" style={{ marginRight: 6 }}>
+              <path d="M18.235 10H12.5V3l-7 11h5.735v7z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Cloudflare R2',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F38020" style={{ marginRight: 6 }}>
+              <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 21h15.3l-.62-3.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Stripe',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#635BFF" style={{ marginRight: 6 }}>
+              <path d="M13.962 10.455c0-1.042-.74-1.564-1.922-1.564-1.464 0-2.31.547-2.31 1.564 0 1.58 2.124 1.3 2.124 2.378 0 1.096-.836 1.63-2.08 1.63-1.636 0-2.616-.628-2.616-1.724H5c0 2.23 1.83 3.633 4.412 3.633 2.926 0 4.55-1.436 4.55-3.633 0-2.528-2.124-2.126-2.124-3.328 0-.962.72-1.412 1.832-1.412 1.34 0 2.054.498 2.054 1.455h2.238z" />
+            </svg>
+          )
+        },
+        {
+          name: 'PayPal',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#003087" style={{ marginRight: 6 }}>
+              <path d="M20.06 6.8c-.37-1.85-1.63-3.2-3.48-3.6C15.3 2.95 13.72 3 12.11 3H6c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M17.2 9.5c-.5 2.5-2.3 3.5-4.8 3.5H9.6L10.3 9h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#003087"/>
+              <path d="M17.06 7.8c-.37-1.85-1.63-3.2-3.48-3.6C12.3 3.95 10.72 4 9.11 4H3c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M14.2 10.5c-.5 2.5-2.3 3.5-4.8 3.5H6.6L7.3 10h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#0079C1" opacity="0.8"/>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Design Tools',
+      skills: [
+        {
+          name: 'Figma',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <path d="M8.5 0C6 0 4 2 4 4.5S6 9 8.5 9H12V0H8.5z" fill="#F24E1E"/>
+              <path d="M15.5 0C13 0 11 2 11 4.5S13 9 15.5 9H19V0H15.5z" fill="#FF7262"/>
+              <path d="M8.5 9C6 9 4 11 4 13.5S6 18 8.5 18H12V9H8.5z" fill="#A259FF"/>
+              <path d="M4 22.5C4 20 6 18 8.5 18H12V22.5C12 25 10 27 8.5 27S4 25 4 22.5z" fill="#1ABC9C"/>
+              <path d="M15.5 9C18 9 20 11 20 13.5S18 18 15.5 18H12V9h3.5z" fill="#18A0FB"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Canva',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00C4CC" style={{ marginRight: 6 }}>
+              <circle cx="12" cy="12" r="12" fill="url(#canvaGrad)"/>
+              <defs>
+                <linearGradient id="canvaGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#7d2ae8"/>
+                  <stop offset="100%" stopColor="#00c4cc"/>
+                </linearGradient>
+              </defs>
+              <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">C</text>
+            </svg>
+          )
+        },
+        {
+          name: 'Spline',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#FF5E62" strokeWidth="2.5" style={{ marginRight: 6 }}>
+              <path d="M4 12c4-8 12 8 16 0" strokeLinecap="round"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Lucidchart',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F05A28" style={{ marginRight: 6 }}>
+              <rect x="2" y="9" width="6" height="6" rx="1"/>
+              <rect x="16" y="9" width="6" height="6" rx="1"/>
+              <line x1="8" y1="12" x2="16" y2="12" stroke="#F05A28" strokeWidth="2"/>
+              <polyline points="13,9 16,12 13,15" stroke="#F05A28" strokeWidth="2" fill="none"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Shopify',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#95BF47" style={{ marginRight: 6 }}>
+              <path d="M19.14 7.14l-1.92-4.8C17.04 1.62 16.2 1 15.24 1H8.76c-.96 0-1.8.62-1.98 1.34L4.86 7.14C4.32 7.38 4 7.92 4 8.52v12.24C4 21.98 5.02 23 6.26 23h11.48c1.24 0 2.26-1.02 2.26-2.24V8.52c0-.6-.32-1.14-.86-1.38zM12 3c.83 0 1.5.67 1.5 1.5S12.83 6 12 6s-1.5-.67-1.5-1.5S11.17 3 12 3zm4.5 15.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S14.17 17 15 17s1.5.67 1.5 1.5z" />
+            </svg>
+          )
+        }
+      ]
+    },
+    {
       title: 'Dev Tools',
       skills: [
         {
@@ -475,17 +484,99 @@ export default function App() {
               <path d="M8.5 8.5L12 5l3.5 3.5H13v6h-2v-6H8.5z" fill="#FFF"/>
             </svg>
           )
+        },
+        {
+          name: 'Insomnia',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#5856d6" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Georgia, serif">I</text>
+            </svg>
+          )
+        },
+        {
+          name: 'DBeaver',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#8B5A2B" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="5" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">DB</text>
+            </svg>
+          )
         }
       ]
     },
     {
-      title: 'AI & Automation',
+      title: 'Monorepo',
+      skills: [
+        {
+          name: 'Turborepo',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#EF4444" style={{ marginRight: 6 }}>
+              <path d="M12 2L2 22h20L12 2z"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Nx',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="5" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">Nx</text>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Security & Testing',
+      skills: [
+        {
+          name: 'OAuth',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3B82F6" style={{ marginRight: 6 }}>
+              <circle cx="12" cy="12" r="10" fill="none" stroke="#3B82F6" strokeWidth="2"/><path d="M12 7v5h3" stroke="#3B82F6" strokeWidth="2" fill="none"/>
+            </svg>
+          )
+        },
+        {
+          name: 'bcrypt',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10z"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Argon2',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F59E0B" style={{ marginRight: 6 }}>
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Jest',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#C21325" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="6" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">J</text>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'AI Coding Tools',
       skills: [
         {
           name: 'Antigravity',
           icon: (
             <svg viewBox="0 0 24 24" width="14" height="14" fill="#ec4899" style={{ marginRight: 6 }}>
               <path d="M12 2L2 22h4l3-6h6l3 6h4L12 2zm-2 11l2-4 2 4H10z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Codex',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">Cx</text>
             </svg>
           )
         },
@@ -498,21 +589,10 @@ export default function App() {
           )
         },
         {
-          name: 'Make.com',
+          name: 'Windsurf',
           icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#EA3A90" style={{ marginRight: 6 }}>
-              <circle cx="7" cy="7" r="4"/><circle cx="17" cy="7" r="4"/><circle cx="12" cy="17" r="4"/>
-              <line x1="7" y1="7" x2="17" y2="7" stroke="#EA3A90" strokeWidth="2"/>
-              <line x1="7" y1="7" x2="12" y2="17" stroke="#EA3A90" strokeWidth="2"/>
-              <line x1="17" y1="7" x2="12" y2="17" stroke="#EA3A90" strokeWidth="2"/>
-            </svg>
-          )
-        },
-        {
-          name: 'Zapier',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#FF4A00" style={{ marginRight: 6 }}>
-              <polygon points="12,2 14,9 21,9 15,13 18,20 12,16 6,20 9,13 3,9 10,9" />
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3B82F6" style={{ marginRight: 6 }}>
+              <polygon points="12,2 22,22 12,18 2,22" />
             </svg>
           )
         }
