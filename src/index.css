@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    Paolo Ando Portfolio — chrisdb.dev Style
    ============================================================ */
 
@@ -743,4 +743,85 @@ body {
   .chatbot-panel { width: calc(100vw - 3rem); right: 1.5rem; }
   .gradient-text { font-size: 2.2rem; }
 }
+
+/* ── Skills & Tools Section Styling ────────────────────── */
+.skills-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .skills-categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skills-category-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skills-category-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #78716c;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.skills-items-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-interactive-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  color: #e7e5e4;
+  font-size: 0.82rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.skill-interactive-btn svg {
+  flex-shrink: 0;
+}
+
+.skill-interactive-btn:hover {
+  background: rgba(236, 72, 153, 0.05);
+  border-color: rgba(236, 72, 153, 0.3);
+  transform: translateY(-1px);
+}
+
+.skill-interactive-btn.active {
+  background: rgba(236, 72, 153, 0.15);
+  border-color: #ec4899;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.2);
+}
+
+/* Project highlight transitions */
+.project-card {
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-dimmed {
+  opacity: 0.18;
+  transform: scale(0.98);
+}
+
 

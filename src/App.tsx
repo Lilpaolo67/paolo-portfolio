@@ -173,6 +173,7 @@ const GitHubCalendar = () => (
 );
 
 /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Main App Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* ─── Main App ────────────────────────────────────────── */
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [ready, setReady] = useState(false);
@@ -184,6 +185,7 @@ export default function App() {
   const [chatLoading, setChatLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formSent, setFormSent] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -220,12 +222,303 @@ export default function App() {
   };
 
   const projects = [
-    { name: 'FUR AI SMART FEEDER', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['IoT', 'App Control', 'Hardware'], link: 'https://fur.homewizie.com/' },
-    { name: 'Homewizie B2B Platform', desc: 'Smart space integration platform for boutique hotels, premium residences, and corporate workspaces. Custom ambient tech deployments.', status: 'Live', tech: ['B2B', 'Smart Home', 'Enterprise'], link: 'https://homewizie.com' },
-    { name: 'AI Automation Agency', desc: 'Done-for-you AI automation systems for B2B and DTC brands. We build workflows, lead gen systems, and sales pipelines powered by AI.', status: 'Live', tech: ['AI', 'Automation', 'B2B', 'DTC'] },
+    { name: 'FUR AI SMART FEEDER', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['Figma', 'Canva', 'Shopify', 'Hardware'], link: 'https://fur.homewizie.com/' },
+    { name: 'Homewizie B2B & DTC Platform', desc: 'Homewizie e-commerce store where we sell our products directly to customers and handle wholesale orders for businesses.', status: 'Live', tech: ['Shopify', 'Stripe', 'PayPal', 'Klaviyo', 'Meta Ads'], link: 'https://homewizie.com' },
+    { name: 'AI Automation Agency', desc: 'Done-for-you AI automation systems for B2B and DTC brands. We build workflows, lead gen systems, and sales pipelines powered by AI.', status: 'Live', tech: ['Python', 'Make.com', 'Zapier', 'Cursor', 'GitHub'] },
   ];
 
-  const skills = ['Marine Engineering', 'B2B', 'High Ticket Sales', 'Product Research', 'Marketing Strategy', 'AI Automation', 'IoT Systems', 'Product Design', 'Thermodynamics', 'Hardware', 'Strategic Planning'];
+  const skillCategories = [
+    {
+      title: 'Languages & Markup',
+      skills: [
+        {
+          name: 'JavaScript',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F7DF1E" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/>
+              <text x="13" y="19" fill="#000000" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">JS</text>
+            </svg>
+          )
+        },
+        {
+          name: 'TypeScript',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3178C6" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/>
+              <text x="13" y="19" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">TS</text>
+            </svg>
+          )
+        },
+        {
+          name: 'Python',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3776AB" style={{ marginRight: 6 }}>
+              <path d="M11.89 2C8.75 2 8.35 2.14 7.12 2.69c-1.37.6-2.12 1.54-2.12 3.16v2.18h4.25v.6H3.14c-1.62 0-2.56.75-3.1 2.12C0 12 0 12.4 0 13.56c0 1.17.05 1.57.6 2.8 1.11 2.5 2.87 2.64 4.54 2.64h1.4v-2c0-2 1.65-3.66 3.66-3.66h4.59c1.55 0 2.8-1.25 2.8-2.8V5.95c0-1.55-1.25-2.8-2.8-2.8h-2.9V2h-.01z" />
+              <path d="M12.11 22c3.14 0 3.54-.14 4.77-.69 1.37-.6 2.12-1.54 2.12-3.16v-2.18h-4.25v-.6h6.12c1.62 0 2.56-.75 3.1-2.12.05-.33.13-.73.13-1.89 0-1.17-.05-1.57-.6-2.8-1.11-2.5-2.87-2.64-4.54-2.64h-1.4v2c0 2-1.65 3.66-3.66 3.66H9.33c-1.55 0-2.8 1.25-2.8 2.8v4.59c0 1.55 1.25 2.8 2.8 2.8h2.9v1.15z" fill="#FFD343" />
+            </svg>
+          )
+        },
+        {
+          name: 'HTML',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#E34F26" style={{ marginRight: 6 }}>
+              <path d="M1.5 22L0 0h24l-1.5 22L12 24z M12 2.7v7.5h6.3L17.7 17l-5.7 1.6V21.3l8.8-2.4 1.2-13.6z M12 2.7L3.2 5.3l1.2 13.6 8.8 2.4V18.6l-5.7-1.6L7.2 13H12V10.2H5.3l-.2-2.7H12z" />
+            </svg>
+          )
+        },
+        {
+          name: 'CSS',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#1572B6" style={{ marginRight: 6 }}>
+              <path d="M1.5 22L0 0h24l-1.5 22L12 24z M12 2.7v7.5h6.3L17.7 17l-5.7 1.6V21.3l8.8-2.4 1.2-13.6z M12 2.7L3.2 5.3l1.2 13.6 8.8 2.4V18.6l-5.7-1.6L7.2 13H12V10.2H5.3l-.2-2.7H12z" />
+            </svg>
+          )
+        },
+        {
+          name: 'SQL',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00758F" style={{ marginRight: 6 }}>
+              <path d="M12 2C6.48 2 2 4.02 2 6.5s4.48 4.5 10 4.5 10-2.02 10-4.5S17.52 2 12 2zm0 18c-5.52 0-10-2.02-10-4.5v-3c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v3c0 2.48-4.48 4.5-10 4.5zm0-6c-5.52 0-10-2.02-10-4.5v-3c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v3c0 2.48-4.48 4.5-10 4.5z" />
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Databases & Services',
+      skills: [
+        {
+          name: 'PostgreSQL',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#336791" style={{ marginRight: 6 }}>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.09 14.14c-.06.05-.12.09-.19.12-.4.18-.89.14-1.28-.12-.08-.05-.14-.11-.2-.18-.28-.31-.41-.72-.37-1.13.04-.41.22-.79.52-1.07.2-.18.46-.28.73-.28h.07c.56.03 1.05.39 1.21.93.12.4-.01.83-.32 1.13l-.47.6zM15 10.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5z" />
+            </svg>
+          )
+        },
+        {
+          name: 'MySQL',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00758F" style={{ marginRight: 6 }}>
+              <path d="M12.11 3C8.12 3 5 6.12 5 10c0 2.12.88 4.02 2.29 5.37L5.5 21h13l-1.79-5.63C18.12 14.02 19 12.12 19 10c0-3.88-3.12-7-6.89-7z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Supabase',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3ECF8E" style={{ marginRight: 6 }}>
+              <path d="M18.235 10H12.5V3l-7 11h5.735v7z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Stripe',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#635BFF" style={{ marginRight: 6 }}>
+              <path d="M13.962 10.455c0-1.042-.74-1.564-1.922-1.564-1.464 0-2.31.547-2.31 1.564 0 1.58 2.124 1.3 2.124 2.378 0 1.096-.836 1.63-2.08 1.63-1.636 0-2.616-.628-2.616-1.724H5c0 2.23 1.83 3.633 4.412 3.633 2.926 0 4.55-1.436 4.55-3.633 0-2.528-2.124-2.126-2.124-3.328 0-.962.72-1.412 1.832-1.412 1.34 0 2.054.498 2.054 1.455h2.238z" />
+            </svg>
+          )
+        },
+        {
+          name: 'PayPal',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#003087" style={{ marginRight: 6 }}>
+              <path d="M20.06 6.8c-.37-1.85-1.63-3.2-3.48-3.6C15.3 2.95 13.72 3 12.11 3H6c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M17.2 9.5c-.5 2.5-2.3 3.5-4.8 3.5H9.6L10.3 9h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#003087"/>
+              <path d="M17.06 7.8c-.37-1.85-1.63-3.2-3.48-3.6C12.3 3.95 10.72 4 9.11 4H3c-.55 0-1 .45-1 1l-3 15c-.1.5.3.9.8.9h4.3l.9-4.5c.1-.5.5-.8 1-.8h2.3c3.6 0 6.3-1.4 7.1-5.1.5-2.2.2-4.1-1.3-5.2z M14.2 10.5c-.5 2.5-2.3 3.5-4.8 3.5H6.6L7.3 10h2.1c2.2 0 3.9-.3 4.4.5.3.3.4.8.4 1.3z" fill="#0079C1" opacity="0.8"/>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Design Tools',
+      skills: [
+        {
+          name: 'Shopify',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#95BF47" style={{ marginRight: 6 }}>
+              <path d="M19.14 7.14l-1.92-4.8C17.04 1.62 16.2 1 15.24 1H8.76c-.96 0-1.8.62-1.98 1.34L4.86 7.14C4.32 7.38 4 7.92 4 8.52v12.24C4 21.98 5.02 23 6.26 23h11.48c1.24 0 2.26-1.02 2.26-2.24V8.52c0-.6-.32-1.14-.86-1.38zM12 3c.83 0 1.5.67 1.5 1.5S12.83 6 12 6s-1.5-.67-1.5-1.5S11.17 3 12 3zm4.5 15.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S14.17 17 15 17s1.5.67 1.5 1.5z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Figma',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <path d="M8.5 0C6 0 4 2 4 4.5S6 9 8.5 9H12V0H8.5z" fill="#F24E1E"/>
+              <path d="M15.5 0C13 0 11 2 11 4.5S13 9 15.5 9H19V0H15.5z" fill="#FF7262"/>
+              <path d="M8.5 9C6 9 4 11 4 13.5S6 18 8.5 18H12V9H8.5z" fill="#A259FF"/>
+              <path d="M4 22.5C4 20 6 18 8.5 18H12V22.5C12 25 10 27 8.5 27S4 25 4 22.5z" fill="#1ABC9C"/>
+              <path d="M15.5 9C18 9 20 11 20 13.5S18 18 15.5 18H12V9h3.5z" fill="#18A0FB"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Canva',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00C4CC" style={{ marginRight: 6 }}>
+              <circle cx="12" cy="12" r="12" fill="url(#canvaGrad)"/>
+              <defs>
+                <linearGradient id="canvaGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#7d2ae8"/>
+                  <stop offset="100%" stopColor="#00c4cc"/>
+                </linearGradient>
+              </defs>
+              <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">C</text>
+            </svg>
+          )
+        },
+        {
+          name: 'Spline',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#FF5E62" strokeWidth="2.5" style={{ marginRight: 6 }}>
+              <path d="M4 12c4-8 12 8 16 0" strokeLinecap="round"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Lucidchart',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F05A28" style={{ marginRight: 6 }}>
+              <rect x="2" y="9" width="6" height="6" rx="1"/>
+              <rect x="16" y="9" width="6" height="6" rx="1"/>
+              <line x1="8" y1="12" x2="16" y2="12" stroke="#F05A28" strokeWidth="2"/>
+              <polyline points="13,9 16,12 13,15" stroke="#F05A28" strokeWidth="2" fill="none"/>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Marketing Tools',
+      skills: [
+        {
+          name: 'Higgsfield',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="5" fill="url(#higgsGrad)"/>
+              <defs>
+                <linearGradient id="higgsGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#8A2BE2"/>
+                  <stop offset="100%" stopColor="#4A0E4E"/>
+                </linearGradient>
+              </defs>
+              <path d="M12 5l1.5 4.5H18l-3.75 2.75L15.75 17 12 14.25 8.25 17l1.5-4.75L6 9.5h4.5z" fill="#FFF"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Kling AI',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="5" fill="url(#klingGrad)"/>
+              <defs>
+                <linearGradient id="klingGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#FF4500"/>
+                  <stop offset="100%" stopColor="#FF8C00"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 10V7.5C16 6.67 15.33 6 14.5 6h-9C4.67 6 4 6.67 4 7.5v9c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5V14l4 4V6l-4 4z" fill="#FFF"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Klaviyo',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#15A05F" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="6" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Georgia, serif">K</text>
+            </svg>
+          )
+        },
+        {
+          name: 'Meta Ads',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#0668E1" style={{ marginRight: 6 }}>
+              <path d="M16.92 7.73a4.7 4.7 0 0 0-3.32 1.39l-.36.36-.36-.36a4.7 4.7 0 0 0-3.32-1.39 4.78 4.78 0 0 0-4.8 4.8 4.78 4.78 0 0 0 4.8 4.8 4.7 4.7 0 0 0 3.32-1.39l.36-.36.36.36a4.7 4.7 0 0 0 3.32 1.39 4.78 4.78 0 0 0 4.8-4.8 4.78 4.78 0 0 0-4.8-4.8zm-7.64 7.2a2.38 2.38 0 0 1-2.4-2.4 2.38 2.38 0 0 1 2.4-2.4 2.3 2.3 0 0 1 1.63.68l1.09 1.09-1.09 1.09a2.3 2.3 0 0 1-1.63.68c-.01 0 0 0 0 0zm7.64 0a2.3 2.3 0 0 1-1.63-.68l-1.09-1.09 1.09-1.09a2.3 2.3 0 0 1 1.63.68 2.38 2.38 0 0 1 2.4 2.4 2.38 2.38 0 0 1-2.4 2.4z"/>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'Dev Tools',
+      skills: [
+        {
+          name: 'Git',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#F05032" style={{ marginRight: 6 }}>
+              <path d="M23.3 11.7L12.3.7c-.5-.5-1.2-.5-1.7 0L8.8 2.5l2.6 2.6c.4-.1.8.1 1 .4.3.3.3.8 0 1.1-.3.3-.8.3-1.1 0-.3-.2-.4-.6-.3-1L8.4 3 6 5.4l2.6 2.6c.4-.1.8.1 1 .4.3.3.3.8 0 1.1-.3.3-.8.3-1.1 0-.3-.2-.4-.6-.3-1L5.6 6 .7 10.9c-.5.5-.5 1.2 0 1.7l11 11c.5.5 1.2.5 1.7 0l9.9-9.9c.5-.5.5-1.2 0-1.7z" />
+            </svg>
+          )
+        },
+        {
+          name: 'GitHub',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFFFFF" style={{ marginRight: 6 }}>
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
+          )
+        },
+        {
+          name: 'VS Code',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#007ACC" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">VS</text>
+            </svg>
+          )
+        },
+        {
+          name: 'Postman',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#FF6C37" style={{ marginRight: 6 }}>
+              <circle cx="12" cy="12" r="10" fill="#FF6C37"/>
+              <path d="M8.5 8.5L12 5l3.5 3.5H13v6h-2v-6H8.5z" fill="#FFF"/>
+            </svg>
+          )
+        }
+      ]
+    },
+    {
+      title: 'AI & Automation',
+      skills: [
+        {
+          name: 'Antigravity',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#ec4899" style={{ marginRight: 6 }}>
+              <path d="M12 2L2 22h4l3-6h6l3 6h4L12 2zm-2 11l2-4 2 4H10z" />
+            </svg>
+          )
+        },
+        {
+          name: 'Cursor',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00E5FF" style={{ marginRight: 6 }}>
+              <polygon points="9,4 18,13 13,13 16,19 14,20 11,14 9,16" />
+            </svg>
+          )
+        },
+        {
+          name: 'Make.com',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#EA3A90" style={{ marginRight: 6 }}>
+              <circle cx="7" cy="7" r="4"/><circle cx="17" cy="7" r="4"/><circle cx="12" cy="17" r="4"/>
+              <line x1="7" y1="7" x2="17" y2="7" stroke="#EA3A90" strokeWidth="2"/>
+              <line x1="7" y1="7" x2="12" y2="17" stroke="#EA3A90" strokeWidth="2"/>
+              <line x1="17" y1="7" x2="12" y2="17" stroke="#EA3A90" strokeWidth="2"/>
+            </svg>
+          )
+        },
+        {
+          name: 'Zapier',
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#FF4A00" style={{ marginRight: 6 }}>
+              <polygon points="12,2 14,9 21,9 15,13 18,20 12,16 6,20 9,13 3,9 10,9" />
+            </svg>
+          )
+        }
+      ]
+    }
+  ];
 
   return (
     <>
@@ -278,8 +571,35 @@ export default function App() {
             <h2 className="section-heading">About</h2>
             <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
             <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
-            <div className="skills-chips">
-              {skills.map(s => <span key={s} className="skill-chip">{s}</span>)}
+          </div>
+
+          {/* Skills & Tools */}
+          <div className="content-section">
+            <h2 className="section-heading">Skills & Tools</h2>
+            <p className="section-text" style={{ marginBottom: '1.25rem' }}>
+              Technologies and platforms I work with. Click any skill below to highlight related projects.
+            </p>
+            <div className="skills-categories-grid">
+              {skillCategories.map(cat => (
+                <div key={cat.title} className="skills-category-card glass-warm">
+                  <h3 className="skills-category-title">{cat.title}</h3>
+                  <div className="skills-items-wrap">
+                    {cat.skills.map(skill => {
+                      const isSelected = selectedSkill === skill.name;
+                      return (
+                        <button
+                          key={skill.name}
+                          onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
+                          className={`skill-interactive-btn ${isSelected ? 'active' : ''}`}
+                        >
+                          {skill.icon}
+                          <span>{skill.name}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -328,25 +648,28 @@ export default function App() {
           <div className="content-section">
             <h2 className="section-heading">Projects</h2>
             <div className="projects-grid">
-              {projects.map(p => (
-                <div key={p.name} className="project-card glass-warm">
-                  <div className="project-card-top">
-                    <div>
-                      <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
-                      <h3 className="project-name">{p.name}</h3>
+              {projects.map(p => {
+                const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
+                return (
+                  <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
+                    <div className="project-card-top">
+                      <div>
+                        <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
+                        <h3 className="project-name">{p.name}</h3>
+                      </div>
+                      {p.link && (
+                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
                     </div>
-                    {p.link && (
-                      <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
-                        <ExternalLink size={16} />
-                      </a>
-                    )}
+                    <p className="project-desc">{p.desc}</p>
+                    <div className="project-tech">
+                      {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                    </div>
                   </div>
-                  <p className="project-desc">{p.desc}</p>
-                  <div className="project-tech">
-                    {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
