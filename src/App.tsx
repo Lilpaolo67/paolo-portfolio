@@ -248,6 +248,15 @@ export default function App() {
       tech: ['TypeScript', 'React', 'PayPal'],
       image: 'https://pub-5d0fe94a3da5458ca88e4e79220a6798.r2.dev/opengraph_fur.png',
       link: 'https://fur.homewizie.com/'
+    },
+    {
+      name: 'Sofie Realtor',
+      subtitle: 'Premium Real Estate Portal in Cebu',
+      desc: "Developed a premium real estate platform showcasing luxury homes, condos, commercial properties, and prime land in Cebu. Features an elegant user interface, smooth property navigation, and optimized lead capture.",
+      status: 'Live',
+      tech: ['HTML5', 'CSS3', 'JavaScript'],
+      image: 'https://lilpaolo67.github.io/sofie-realtor/images/cebu_hero.jpg',
+      link: 'https://lilpaolo67.github.io/sofie-realtor/'
     }
   ];
 
@@ -766,7 +775,7 @@ export default function App() {
                   return (
                     <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`} style={{ padding: 0, overflow: 'hidden' }}>
                       {p.image && (
-                        <div style={{ width: '100%', height: '240px', overflow: 'hidden', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <div style={{ width: '100%', aspectRatio: '16 / 10', overflow: 'hidden', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
                           <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       )}
