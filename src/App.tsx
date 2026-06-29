@@ -251,7 +251,7 @@ export default function App() {
     },
     {
       name: 'Sofie Realtor',
-      subtitle: 'Premium Real Estate Portal in Cebu',
+      subtitle: 'AI-automation focused real estate website',
       desc: "Developed a premium real estate platform showcasing luxury homes, condos, commercial properties, and prime land in Cebu. Features an elegant user interface, smooth property navigation, and optimized lead capture.",
       status: 'Live',
       tech: ['HTML5', 'CSS3', 'JavaScript'],
