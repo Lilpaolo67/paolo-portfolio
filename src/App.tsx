@@ -236,7 +236,7 @@ export default function App() {
       name: 'Homewizie Admin Hub',
       subtitle: 'Operations & Management Dashboard',
       desc: 'Built a secure operations dashboard to manage orders, issue refunds, update shipping status, and handle cancellations across all Homewizie products. Includes integrations for backend supplier linkages.',
-      status: 'MVP',
+      status: 'Live',
       tech: ['TypeScript', 'React', 'Supabase', 'Zustand', 'TanStack Query', 'shadcn/ui'],
       image: 'https://pub-5d0fe94a3da5458ca88e4e79220a6798.r2.dev/opengraph_adminhub.png'
     },
