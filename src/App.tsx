@@ -222,9 +222,32 @@ export default function App() {
   };
 
   const projects = [
-    { name: 'FUR AI SMART FEEDER', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['Figma', 'Canva', 'Shopify', 'Hardware'], link: 'https://fur.homewizie.com/' },
-    { name: 'Homewizie B2B & DTC Platform', desc: 'Homewizie e-commerce store where we sell our products directly to customers and handle wholesale orders for businesses.', status: 'Live', tech: ['Shopify', 'Stripe', 'PayPal', 'Klaviyo', 'Meta Ads'], link: 'https://homewizie.com' },
-    { name: 'AI Automation Agency', desc: 'Done-for-you AI automation systems for B2B and DTC brands. We build workflows, lead gen systems, and sales pipelines powered by AI.', status: 'Live', tech: ['Python', 'Make.com', 'Zapier', 'Cursor', 'GitHub'] },
+    {
+      name: 'Homewizie',
+      subtitle: 'Main E-commerce Storefront',
+      desc: "Developed the main storefront and umbrella brand website for Homewizie. Designed to showcase all the brand's products, allowing customers to browse the full catalog with a clean and high-performance user experience.",
+      status: 'Live',
+      tech: ['TypeScript', 'React', 'Supabase', 'Zustand', 'TanStack Query'],
+      image: 'https://pub-5d0fe94a3da5458ca88e4e79220a6798.r2.dev/opengraph_homewizie.png',
+      link: 'https://homewizie.com'
+    },
+    {
+      name: 'Homewizie Admin Hub',
+      subtitle: 'Operations & Management Dashboard',
+      desc: 'Built a secure operations dashboard to manage orders, issue refunds, update shipping status, and handle cancellations across all Homewizie products. Includes integrations for backend supplier linkages.',
+      status: 'MVP',
+      tech: ['TypeScript', 'React', 'Supabase', 'Zustand', 'TanStack Query', 'shadcn/ui'],
+      image: 'https://pub-5d0fe94a3da5458ca88e4e79220a6798.r2.dev/opengraph_adminhub.png'
+    },
+    {
+      name: 'FUR',
+      subtitle: 'Dedicated Product E-commerce Store',
+      desc: 'Developed a dedicated product e-commerce storefront for Fur, a smart pet feeder sold under the Homewizie brand. Built as a streamlined landing page and direct checkout funnel to allow users to purchase the feeder.',
+      status: 'Live',
+      tech: ['TypeScript', 'React', 'PayPal'],
+      image: 'https://pub-5d0fe94a3da5458ca88e4e79220a6798.r2.dev/opengraph_fur.png',
+      link: 'https://fur.homewizie.com/'
+    }
   ];
 
   const skillCategories = [
@@ -711,21 +734,31 @@ export default function App() {
               {projects.map(p => {
                 const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
                 return (
-                  <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
-                    <div className="project-card-top">
-                      <div>
-                        <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
-                        <h3 className="project-name">{p.name}</h3>
+                  <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`} style={{ padding: 0, overflow: 'hidden' }}>
+                    {p.image && (
+                      <div style={{ width: '100%', height: '180px', overflow: 'hidden', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
-                      {p.link && (
-                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
-                          <ExternalLink size={16} />
-                        </a>
-                      )}
-                    </div>
-                    <p className="project-desc">{p.desc}</p>
-                    <div className="project-tech">
-                      {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                    )}
+                    <div style={{ padding: '1.25rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flexGrow: 1 }}>
+                      <div className="project-card-top">
+                        <div>
+                          <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'MVP' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
+                          <h3 className="project-name" style={{ fontSize: '1.1rem', fontWeight: 600 }}>{p.name}</h3>
+                          {p.subtitle && (
+                            <p style={{ fontSize: '0.76rem', color: '#e879f9', fontWeight: 500, marginTop: '0.15rem' }}>{p.subtitle}</p>
+                          )}
+                        </div>
+                        {p.link && (
+                          <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
+                            <ExternalLink size={16} />
+                          </a>
+                        )}
+                      </div>
+                      <p className="project-desc" style={{ flexGrow: 1 }}>{p.desc}</p>
+                      <div className="project-tech">
+                        {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
+                      </div>
                     </div>
                   </div>
                 );
