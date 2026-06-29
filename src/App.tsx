@@ -277,7 +277,7 @@ export default function App() {
           {/* About */}
           <div className="content-section">
             <h2 className="section-heading">About</h2>
-            <p className="section-text">I started my career as a Marine Systems Engineer operating heavy propulsion plants and diesel engines on cargo vessels. That obsession with system precision and zero failure tolerance now drives how I build and sell technology. I founded Homewizie to deploy premium ambient smart devices for hotels, residences, and workspaces.</p>
+            <p className="section-text">I started as a Marine Engineer on cargo ships. That discipline and zero-failure mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
             <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
             <div className="skills-chips">
               {skills.map(s => <span key={s} className="skill-chip">{s}</span>)}
