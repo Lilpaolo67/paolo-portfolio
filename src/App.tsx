@@ -186,7 +186,6 @@ export default function App() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formSent, setFormSent] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'experience' | 'skills' | 'projects'>('experience');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -291,19 +290,49 @@ export default function App() {
       skills: [
         {
           name: 'Higgsfield',
-          icon: <img src="/higgsfield.png" alt="Higgsfield" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="5" fill="url(#higgsGrad)"/>
+              <defs>
+                <linearGradient id="higgsGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#8A2BE2"/>
+                  <stop offset="100%" stopColor="#4A0E4E"/>
+                </linearGradient>
+              </defs>
+              <path d="M12 5l1.5 4.5H18l-3.75 2.75L15.75 17 12 14.25 8.25 17l1.5-4.75L6 9.5h4.5z" fill="#FFF"/>
+            </svg>
+          )
         },
         {
           name: 'Kling AI',
-          icon: <img src="/kling.png" alt="Kling AI" style={{ width: 14, height: 14, marginRight: 6, borderRadius: '50%' }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="5" fill="url(#klingGrad)"/>
+              <defs>
+                <linearGradient id="klingGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#FF4500"/>
+                  <stop offset="100%" stopColor="#FF8C00"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 10V7.5C16 6.67 15.33 6 14.5 6h-9C4.67 6 4 6.67 4 7.5v9c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5V14l4 4V6l-4 4z" fill="#FFF"/>
+            </svg>
+          )
         },
         {
           name: 'Klaviyo',
-          icon: <img src="/klaviyo.png" alt="Klaviyo" style={{ width: 14, height: 14, marginRight: 6 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#15A05F" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="6" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Georgia, serif">K</text>
+            </svg>
+          )
         },
         {
           name: 'Meta Ads',
-          icon: <img src="/meta.png" alt="Meta Ads" style={{ width: 14, height: 14, marginRight: 6 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#0668E1" style={{ marginRight: 6 }}>
+              <path d="M16.92 7.73a4.7 4.7 0 0 0-3.32 1.39l-.36.36-.36-.36a4.7 4.7 0 0 0-3.32-1.39 4.78 4.78 0 0 0-4.8 4.8 4.78 4.78 0 0 0 4.8 4.8 4.7 4.7 0 0 0 3.32-1.39l.36-.36.36.36a4.7 4.7 0 0 0 3.32 1.39 4.78 4.78 0 0 0 4.8-4.8 4.78 4.78 0 0 0-4.8-4.8zm-7.64 7.2a2.38 2.38 0 0 1-2.4-2.4 2.38 2.38 0 0 1 2.4-2.4 2.3 2.3 0 0 1 1.63.68l1.09 1.09-1.09 1.09a2.3 2.3 0 0 1-1.63.68c-.01 0 0 0 0 0zm7.64 0a2.3 2.3 0 0 1-1.63-.68l-1.09-1.09 1.09-1.09a2.3 2.3 0 0 1 1.63.68 2.38 2.38 0 0 1 2.4 2.4 2.38 2.38 0 0 1-2.4 2.4z"/>
+            </svg>
+          )
         }
       ]
     },
@@ -537,27 +566,35 @@ export default function App() {
       skills: [
         {
           name: 'Antigravity',
-          icon: <img src="/antigravity.png" alt="Antigravity" style={{ width: 14, height: 14, marginRight: 6 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#ec4899" style={{ marginRight: 6 }}>
+              <path d="M12 2L2 22h4l3-6h6l3 6h4L12 2zm-2 11l2-4 2 4H10z" />
+            </svg>
+          )
         },
         {
           name: 'Codex',
           icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10a37f" style={{ marginRight: 6 }}>
-              <path d="M21.74 11.23a5.22 5.22 0 0 0-1.89-3.79 5.38 5.38 0 0 0-.25-5.35c-1.39-2.28-4.22-3-6.53-1.63a5.21 5.21 0 0 0-4.8 0c-2.3-1.37-5.14-.65-6.53 1.63a5.41 5.41 0 0 0-.25 5.35 5.21 5.21 0 0 0-1.89 3.79c0 2.22 1.34 4.14 3.32 4.88a5.36 5.36 0 0 0 .25 5.35c1.39 2.28 4.22 3 6.53 1.63a5.22 5.22 0 0 0 4.8 0c2.3 1.37 5.14.65 6.53-1.63a5.36 5.36 0 0 0 .25-5.35c2-.74 3.34-2.66 3.34-4.88z" />
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#10B981" style={{ marginRight: 6 }}>
+              <rect width="24" height="24" rx="3"/><text x="4" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Arial, sans-serif">Cx</text>
             </svg>
           )
         },
         {
           name: 'Cursor',
-          icon: <img src="/cursor.png" alt="Cursor" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#00E5FF" style={{ marginRight: 6 }}>
+              <polygon points="9,4 18,13 13,13 16,19 14,20 11,14 9,16" />
+            </svg>
+          )
         },
         {
           name: 'Windsurf',
-          icon: <img src="/windsurf.png" alt="Windsurf" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
-        },
-        {
-          name: 'Make.com',
-          icon: <img src="/make.png" alt="Make.com" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
+          icon: (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#3B82F6" style={{ marginRight: 6 }}>
+              <polygon points="12,2 22,22 12,18 2,22" />
+            </svg>
+          )
         }
       ]
     }
@@ -609,142 +646,112 @@ export default function App() {
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="portfolio-tabs">
-            <button
-              onClick={() => setActiveTab('experience')}
-              className={`tab-btn ${activeTab === 'experience' ? 'active' : ''}`}
-            >
-              Experience
-            </button>
-            <button
-              onClick={() => setActiveTab('skills')}
-              className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
-            >
-              Skills
-            </button>
-            <button
-              onClick={() => setActiveTab('projects')}
-              className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
-            >
-              Projects
-            </button>
+          {/* About */}
+          <div className="content-section">
+            <h2 className="section-heading">About</h2>
+            <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
+            <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
           </div>
 
-          {activeTab === 'experience' && (
-            <>
-              {/* About */}
-              <div className="content-section">
-                <h2 className="section-heading">About</h2>
-                <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
-                <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
-              </div>
-
-              {/* Experience */}
-              <div className="content-section">
-                <h2 className="section-heading">Experience</h2>
-                <div className="timeline-list">
-                  <div className="timeline-entry">
-                    <div className="timeline-dot" />
-                    <div className="timeline-entry-body">
-                      <div className="timeline-header">
-                        <span className="timeline-role">CEO &amp; Founder</span>
-                        <span className="timeline-period">2026 to Present</span>
-                      </div>
-                      <span className="timeline-company">Homewizie Inc.</span>
-                      <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
-                      <div className="timeline-tags">
-                        <span className="tl-tag">B2B Enterprise</span>
-                        <span className="tl-tag">Smart Home</span>
-                        <span className="tl-tag">High-Ticket Sales</span>
-                        <span className="tl-tag">Product Launch</span>
-                      </div>
-                    </div>
+          {/* Skills & Tools */}
+          <div className="content-section">
+            <h2 className="section-heading">Skills & Tools</h2>
+            <p className="section-text" style={{ marginBottom: '1.25rem' }}>
+              Technologies and platforms I work with. Click any skill below to highlight related projects.
+            </p>
+            <div className="skills-categories-grid">
+              {skillCategories.map(cat => (
+                <div key={cat.title} className="skills-category-card glass-warm">
+                  <h3 className="skills-category-title">{cat.title}</h3>
+                  <div className="skills-items-wrap">
+                    {cat.skills.map(skill => {
+                      const isSelected = selectedSkill === skill.name;
+                      return (
+                        <button
+                          key={skill.name}
+                          onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
+                          className={`skill-interactive-btn ${isSelected ? 'active' : ''}`}
+                        >
+                          {skill.icon}
+                          <span>{skill.name}</span>
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div className="timeline-entry">
-                    <div className="timeline-dot" />
-                    <div className="timeline-entry-body">
-                      <div className="timeline-header">
-                        <span className="timeline-role">Marine Systems Engineer</span>
-                        <span className="timeline-period">2025 to 2026</span>
-                      </div>
-                      <span className="timeline-company">Global Maritime Cargo Fleets</span>
-                      <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
-                      <div className="timeline-tags">
-                        <span className="tl-tag">Thermodynamics</span>
-                        <span className="tl-tag">Propulsion Plants</span>
-                        <span className="tl-tag">Hydraulic Systems</span>
-                        <span className="tl-tag">System Safety</span>
-                      </div>
-                    </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Experience */}
+          <div className="content-section">
+            <h2 className="section-heading">Experience</h2>
+            <div className="timeline-list">
+              <div className="timeline-entry">
+                <div className="timeline-dot" />
+                <div className="timeline-entry-body">
+                  <div className="timeline-header">
+                    <span className="timeline-role">CEO &amp; Founder</span>
+                    <span className="timeline-period">2026 to Present</span>
+                  </div>
+                  <span className="timeline-company">Homewizie Inc.</span>
+                  <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
+                  <div className="timeline-tags">
+                    <span className="tl-tag">B2B Enterprise</span>
+                    <span className="tl-tag">Smart Home</span>
+                    <span className="tl-tag">High-Ticket Sales</span>
+                    <span className="tl-tag">Product Launch</span>
                   </div>
                 </div>
               </div>
-            </>
-          )}
+              <div className="timeline-entry">
+                <div className="timeline-dot" />
+                <div className="timeline-entry-body">
+                  <div className="timeline-header">
+                    <span className="timeline-role">Marine Systems Engineer</span>
+                    <span className="timeline-period">2025 to 2026</span>
+                  </div>
+                  <span className="timeline-company">Global Maritime Cargo Fleets</span>
+                  <p className="timeline-desc">Operated and maintained gas turbines, multi-megawatt diesel engines, hydraulic steering systems, and electrical distribution plants on trans-oceanic vessels. Managed engine room crew under heavy sea conditions.</p>
+                  <div className="timeline-tags">
+                    <span className="tl-tag">Thermodynamics</span>
+                    <span className="tl-tag">Propulsion Plants</span>
+                    <span className="tl-tag">Hydraulic Systems</span>
+                    <span className="tl-tag">System Safety</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          {activeTab === 'skills' && (
-            /* Skills & Tools */
-            <div className="content-section">
-              <h2 className="section-heading">Skills & Tools</h2>
-              <p className="section-text" style={{ marginBottom: '1.25rem' }}>
-                Technologies and platforms I work with. Click any skill below to highlight related projects in the Projects tab.
-              </p>
-              <div className="skills-categories-grid">
-                {skillCategories.map(cat => (
-                  <div key={cat.title} className="skills-category-card glass-warm">
-                    <h3 className="skills-category-title">{cat.title}</h3>
-                    <div className="skills-items-wrap">
-                      {cat.skills.map(skill => {
-                        const isSelected = selectedSkill === skill.name;
-                        return (
-                          <button
-                            key={skill.name}
-                            onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
-                            className={`skill-interactive-btn ${isSelected ? 'active' : ''}`}
-                          >
-                            {skill.icon}
-                            <span>{skill.name}</span>
-                          </button>
-                        );
-                      })}
+          {/* Projects */}
+          <div className="content-section">
+            <h2 className="section-heading">Projects</h2>
+            <div className="projects-grid">
+              {projects.map(p => {
+                const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
+                return (
+                  <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
+                    <div className="project-card-top">
+                      <div>
+                        <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
+                        <h3 className="project-name">{p.name}</h3>
+                      </div>
+                      {p.link && (
+                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                    </div>
+                    <p className="project-desc">{p.desc}</p>
+                    <div className="project-tech">
+                      {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
                     </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
-          )}
-
-          {activeTab === 'projects' && (
-            /* Projects */
-            <div className="content-section">
-              <h2 className="section-heading">Projects</h2>
-              <div className="projects-grid">
-                {projects.map(p => {
-                  const isHighlighted = !selectedSkill || p.tech.some(t => t.toLowerCase() === selectedSkill.toLowerCase());
-                  return (
-                    <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`}>
-                      <div className="project-card-top">
-                        <div>
-                          <span className={`project-status-badge ${p.status === 'Launched' || p.status === 'Live' ? 'badge-live' : p.status === 'In Development' ? 'badge-dev' : 'badge-concept'}`}>{p.status}</span>
-                          <h3 className="project-name">{p.name}</h3>
-                        </div>
-                        {p.link && (
-                          <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" aria-label="View project">
-                            <ExternalLink size={16} />
-                          </a>
-                        )}
-                      </div>
-                      <p className="project-desc">{p.desc}</p>
-                      <div className="project-tech">
-                        {p.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+          </div>
 
           {/* Contact */}
           <div className="content-section" id="contact-section">
