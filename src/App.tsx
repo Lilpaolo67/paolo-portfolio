@@ -255,7 +255,7 @@ export default function App() {
       desc: "Developed a premium real estate platform showcasing luxury homes, condos, commercial properties, and prime land in Cebu. Features an elegant user interface, smooth property navigation, and optimized lead capture.",
       status: 'Live',
       tech: ['HTML5', 'CSS3', 'JavaScript'],
-      image: 'https://lilpaolo67.github.io/sofie-realtor/images/cebu_hero.jpg',
+      image: '/sofie_realtor.png',
       link: 'https://lilpaolo67.github.io/sofie-realtor/'
     }
   ];
