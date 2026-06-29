@@ -222,11 +222,10 @@ export default function App() {
   const projects = [
     { name: 'FUR AI SMART FEEDER', desc: 'AI-powered automatic pet feeder with 1080p camera, app control, and airtight food preservation. Currently live on e-commerce.', status: 'Launched', tech: ['IoT', 'App Control', 'Hardware'], link: 'https://fur.homewizie.com/' },
     { name: 'Homewizie B2B Platform', desc: 'Smart space integration platform for boutique hotels, premium residences, and corporate workspaces. Custom ambient tech deployments.', status: 'Live', tech: ['B2B', 'Smart Home', 'Enterprise'], link: 'https://homewizie.com' },
-    { name: 'BREW Smart Coffee Hub', desc: 'Minimalist coffee machine with automatic bean detection, cup size sensing, and custom morning schedules.', status: 'In Development', tech: ['IoT', 'Sensors', 'Hardware'] },
-    { name: 'AER Smart Purifier', desc: 'Fabric-wrapped air purifier with True HEPA H13 filtration, ultra-low power sleep mode, and organic light indicators.', status: 'Concept', tech: ['IoT', 'HEPA', 'Design'] },
+    { name: 'AI Automation Agency', desc: 'Done-for-you AI automation systems for B2B and DTC brands. We build workflows, lead gen systems, and sales pipelines powered by AI.', status: 'Live', tech: ['AI', 'Automation', 'B2B', 'DTC'] },
   ];
 
-  const skills = ['Marine Engineering', 'B2B Sales', 'IoT Systems', 'Product Design', 'Smart Home Tech', 'Thermodynamics', 'Hardware', 'Strategic Planning', 'React', 'TypeScript', 'Node.js', 'AI Integration'];
+  const skills = ['Marine Engineering', 'B2B', 'High Ticket Sales', 'Product Research', 'Marketing Strategy', 'AI Automation', 'IoT Systems', 'Product Design', 'Thermodynamics', 'Hardware', 'Strategic Planning'];
 
   return (
     <>
@@ -277,7 +276,7 @@ export default function App() {
           {/* About */}
           <div className="content-section">
             <h2 className="section-heading">About</h2>
-            <p className="section-text">I started as a Marine Engineer on cargo ships. That discipline and zero-failure mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
+            <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
             <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
             <div className="skills-chips">
               {skills.map(s => <span key={s} className="skill-chip">{s}</span>)}
@@ -354,13 +353,13 @@ export default function App() {
           {/* Contact */}
           <div className="content-section" id="contact-section">
             <h2 className="section-heading">Get in Touch</h2>
-            <p className="section-text">Whether it's a Homewizie project, smart space deployment, or business opportunity Ã¢â‚¬â€ reach out directly.</p>
+            <p className="section-text">Whether it's a B2B deal, AI automation project, or business opportunity — reach out directly.</p>
             <div className="contact-row">
               <a href="mailto:paolo@homewizie.com" className="contact-email-link"><Mail size={16} />paolo@homewizie.com</a>
               <a href="https://homewizie.com" target="_blank" rel="noopener noreferrer" className="contact-email-link"><ExternalLink size={16} />homewizie.com</a>
             </div>
             {formSent ? (
-              <div className="form-success glass-warm"><p>Ã¢Å“â€¦ Message sent! I'll get back to you soon.</p></div>
+              <div className="form-success glass-warm"><p>✅ Message sent! I'll get back to you soon.</p></div>
             ) : (
               <form className="contact-form glass-warm" onSubmit={e => { e.preventDefault(); if (formData.name && formData.email && formData.message) setFormSent(true); }}>
                 <div className="form-row">
@@ -374,7 +373,7 @@ export default function App() {
           </div>
 
           <footer className="portfolio-footer">
-            <p>Paolo Ando Ã‚Â© {new Date().getFullYear()} Ã‚Â· Built with precision, engineered for calm.</p>
+            <p>PAOLO ANDO {new Date().getFullYear()}</p>
           </footer>
         </section>
       </main>
