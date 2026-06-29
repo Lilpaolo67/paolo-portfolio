@@ -766,7 +766,7 @@ export default function App() {
                   return (
                     <div key={p.name} className={`project-card glass-warm ${!isHighlighted ? 'project-card-dimmed' : ''}`} style={{ padding: 0, overflow: 'hidden' }}>
                       {p.image && (
-                        <div style={{ width: '100%', height: '180px', overflow: 'hidden', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <div style={{ width: '100%', height: '240px', overflow: 'hidden', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
                           <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       )}
