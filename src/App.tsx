@@ -683,12 +683,7 @@ export default function App() {
 
           {activeTab === 'experience' && (
             <>
-              {/* About */}
-              <div className="content-section">
-                <h2 className="section-heading">About</h2>
-                <p className="section-text">I started as a Marine Engineer on cargo ships. Every failure on those vessels taught me something — and that same mindset is what I bring to everything I do now. I launched my own products, built my own brand from scratch, and I help other B2B and DTC businesses scale and grow.</p>
-                <p className="section-text" style={{ marginTop: '0.75rem' }}>I also run a web design agency helping businesses get more clients through fast, modern, AI-automated websites.</p>
-              </div>
+
 
               {/* Experience */}
               <div className="content-section">
