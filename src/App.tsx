@@ -696,7 +696,10 @@ export default function App() {
                         <span className="timeline-role">CEO &amp; Founder</span>
                         <span className="timeline-period">2026 to Present</span>
                       </div>
-                      <span className="timeline-company">Homewizie Inc.</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.35rem 0 0.5rem 0' }}>
+                        <img src="/homewizie_logo.png" alt="Homewizie logo" style={{ height: '16px', objectFit: 'contain' }} />
+                        <span className="timeline-company" style={{ margin: 0 }}>Homewizie Inc.</span>
+                      </div>
                       <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
                       <div className="timeline-tags">
                         <span className="tl-tag">B2B Enterprise</span>
