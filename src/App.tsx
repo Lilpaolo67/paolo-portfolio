@@ -323,49 +323,19 @@ export default function App() {
       skills: [
         {
           name: 'Higgsfield',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
-              <rect width="24" height="24" rx="5" fill="url(#higgsGrad)"/>
-              <defs>
-                <linearGradient id="higgsGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8A2BE2"/>
-                  <stop offset="100%" stopColor="#4A0E4E"/>
-                </linearGradient>
-              </defs>
-              <path d="M12 5l1.5 4.5H18l-3.75 2.75L15.75 17 12 14.25 8.25 17l1.5-4.75L6 9.5h4.5z" fill="#FFF"/>
-            </svg>
-          )
+          icon: <img src="/higgsfield.png" alt="Higgsfield" style={{ width: 14, height: 14, marginRight: 6, borderRadius: 2 }} />
         },
         {
           name: 'Kling AI',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" style={{ marginRight: 6 }}>
-              <rect width="24" height="24" rx="5" fill="url(#klingGrad)"/>
-              <defs>
-                <linearGradient id="klingGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#FF4500"/>
-                  <stop offset="100%" stopColor="#FF8C00"/>
-                </linearGradient>
-              </defs>
-              <path d="M16 10V7.5C16 6.67 15.33 6 14.5 6h-9C4.67 6 4 6.67 4 7.5v9c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5V14l4 4V6l-4 4z" fill="#FFF"/>
-            </svg>
-          )
+          icon: <img src="/kling.png" alt="Kling AI" style={{ width: 14, height: 14, marginRight: 6, borderRadius: '50%' }} />
         },
         {
           name: 'Klaviyo',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#15A05F" style={{ marginRight: 6 }}>
-              <rect width="24" height="24" rx="3"/><text x="6" y="17" fill="white" fontSize="13" fontWeight="bold" fontFamily="Georgia, serif">K</text>
-            </svg>
-          )
+          icon: <img src="/klaviyo.png" alt="Klaviyo" style={{ width: 14, height: 14, marginRight: 6 }} />
         },
         {
           name: 'Meta Ads',
-          icon: (
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#0668E1" style={{ marginRight: 6 }}>
-              <path d="M16.92 7.73a4.7 4.7 0 0 0-3.32 1.39l-.36.36-.36-.36a4.7 4.7 0 0 0-3.32-1.39 4.78 4.78 0 0 0-4.8 4.8 4.78 4.78 0 0 0 4.8 4.8 4.7 4.7 0 0 0 3.32-1.39l.36-.36.36.36a4.7 4.7 0 0 0 3.32 1.39 4.78 4.78 0 0 0 4.8-4.8 4.78 4.78 0 0 0-4.8-4.8zm-7.64 7.2a2.38 2.38 0 0 1-2.4-2.4 2.38 2.38 0 0 1 2.4-2.4 2.3 2.3 0 0 1 1.63.68l1.09 1.09-1.09 1.09a2.3 2.3 0 0 1-1.63.68c-.01 0 0 0 0 0zm7.64 0a2.3 2.3 0 0 1-1.63-.68l-1.09-1.09 1.09-1.09a2.3 2.3 0 0 1 1.63.68 2.38 2.38 0 0 1 2.4 2.4 2.38 2.38 0 0 1-2.4 2.4z"/>
-            </svg>
-          )
+          icon: <img src="/meta.png" alt="Meta Ads" style={{ width: 14, height: 14, marginRight: 6 }} />
         }
       ]
     },
