@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Send, X, MessageSquare, Mail, ExternalLink, Download } from 'lucide-react';
+import { Send, X, MessageSquare, Mail, ExternalLink, Download, Ship } from 'lucide-react';
 import './index.css';
 
 /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Animated Boat Scene Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
@@ -660,16 +660,15 @@ export default function App() {
                 <h2 className="section-heading">Experience</h2>
                 <div className="timeline-list">
                   <div className="timeline-entry">
-                    <div className="timeline-dot" />
+                    <div className="timeline-icon">
+                      <img src="/homewizie_logo.png" alt="Homewizie" />
+                    </div>
                     <div className="timeline-entry-body">
                       <div className="timeline-header">
                         <span className="timeline-role">CEO &amp; Founder</span>
                         <span className="timeline-period">2026 to Present</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.35rem 0 0.5rem 0' }}>
-                        <img src="/homewizie_logo.png" alt="Homewizie logo" style={{ height: '16px', objectFit: 'contain' }} />
-                        <span className="timeline-company" style={{ margin: 0 }}>Homewizie Inc.</span>
-                      </div>
+                      <span className="timeline-company">Homewizie Inc.</span>
                       <p className="timeline-desc">Leading B2B enterprise smart space integrations for luxury hotels, premium residences, and corporate environments. Managing high-ticket sales pipeline, product distribution, and strategic partnerships.</p>
                       <div className="timeline-tags">
                         <span className="tl-tag">B2B Enterprise</span>
@@ -680,7 +679,9 @@ export default function App() {
                     </div>
                   </div>
                   <div className="timeline-entry">
-                    <div className="timeline-dot" />
+                    <div className="timeline-icon" style={{ background: 'rgba(236, 72, 153, 0.05)', border: '1px solid rgba(236, 72, 153, 0.2)' }}>
+                      <Ship size={16} style={{ color: '#ec4899' }} />
+                    </div>
                     <div className="timeline-entry-body">
                       <div className="timeline-header">
                         <span className="timeline-role">Marine Systems Engineer</span>
